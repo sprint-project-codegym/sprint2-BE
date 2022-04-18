@@ -67,5 +67,8 @@ public class Movie {
     @JsonIgnore
     private Set<MovieTicket> movieTicketSet;
 
+    @OneToMany(mappedBy = "movie")
+    @JsonIgnore
+    private Set<Comment> commentSet;
 }
 
