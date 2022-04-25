@@ -88,4 +88,12 @@ public class MovieServiceImpl implements MovieService {
     public Page<Movie> advancedSearch(String keySearch, String categoryId, String date, String showTimeId, Pageable pageable) {
         return movieRepository.findByTitleAndCategoryAndDateAndShowTime(keySearch, categoryId, date, showTimeId, pageable);
     }
+
+    /**
+     * Author: DongVTH
+     */
+    @Override
+    public Movie getDetailMovie(Integer id) {
+        return movieRepository.findMovieByMovieId(id);
+    }
 }

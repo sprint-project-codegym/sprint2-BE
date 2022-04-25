@@ -44,4 +44,8 @@ public interface MovieService {
      */
     Page<Movie> advancedSearch(String keySearch, String categoryId, String date, String showTimeId, Pageable pageable);
 
+    /**
+     * Author: DongVTH
+     */
+    Movie getDetailMovie(Integer movieId);
 }

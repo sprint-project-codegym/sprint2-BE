@@ -157,4 +157,17 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    /**
+     * Author: DongVTH
+     */
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Movie> getDetailMovie(@PathVariable("id") Integer id) {
+        Movie movie = movieService.getDetailMovie(id);
+        if (movie == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(movie, HttpStatus.OK);
+    }
 }

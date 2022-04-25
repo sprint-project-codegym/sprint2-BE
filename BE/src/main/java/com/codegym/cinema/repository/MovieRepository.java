@@ -78,4 +78,10 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "ORDER BY m.movie_name", nativeQuery = true)
     Page<Movie> findByTitleAndCategoryAndDateAndShowTime(String keySearch, String categoryIdSearch,
                                                          String dateSearch, String showTimeIdSearch, Pageable pageable);
+
+    /**
+     * Author: DongVTH
+     */
+    @Query(value = "select * from movie where movie.movie_id = ?1", nativeQuery = true)
+    Movie findMovieByMovieId(Integer id);
 }
