@@ -4,9 +4,10 @@ import com.codegym.cinema.entity.TransactionHistory;
 import com.codegym.cinema.repository.TransactionHistoryRepository;
 import com.codegym.cinema.service.TransactionHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class TransactionHistoryServiceImpl implements TransactionHistoryService {
@@ -15,7 +16,7 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     private TransactionHistoryRepository transactionHistoryRepository;
 
     @Override
-    public List<TransactionHistory> findTransactionByUsername(String username) {
-        return transactionHistoryRepository.findTransactionByUsername(username);
+    public Page<TransactionHistory> findTransactionByUsername(String username, Pageable pageable) {
+        return transactionHistoryRepository.findTransactionByUsername(username, pageable);
     }
 }

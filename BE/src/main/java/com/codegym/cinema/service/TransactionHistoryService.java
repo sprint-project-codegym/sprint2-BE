@@ -1,9 +1,10 @@
 package com.codegym.cinema.service;
 
 import com.codegym.cinema.entity.TransactionHistory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface TransactionHistoryService {
-    List<TransactionHistory> findTransactionByUsername(String username);
+    Page<TransactionHistory> findTransactionByUsername(String username, Pageable pageable);
 }

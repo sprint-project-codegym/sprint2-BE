@@ -23,8 +23,8 @@ public class Account {
     @Column(name = "register_date", columnDefinition = "DATE")
     private String registerDate;
 
-    @Column(name = "account_status", columnDefinition = "VARCHAR(50)")
-    private String accountStatus;
+    @Column(name = "account_status", columnDefinition = "BIT(1)")
+    private boolean accountStatus;
 
     @OneToOne(mappedBy = "account")
     @JsonIgnore
