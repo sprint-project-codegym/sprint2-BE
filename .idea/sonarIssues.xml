@@ -98,6 +98,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/BE/src/test/java/com/codegym/cinema/controller/TicketController_getListBookedTicket.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/BE/src/test/java/com/codegym/cinema/controller/UserController_createUser.java">
           <value>
             <set />

@@ -44,8 +44,186 @@ public class UserController_createUser {
                 .content(this.objectMapper.writeValueAsString(userCreateDTO))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
     }
+
+    //email = null
+    @Test
+    void createUser_username_13_2() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail(null);
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //avatar_url = null
+    @Test
+    void createUser_username_13_3() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl(null);
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //birthday = null
+    @Test
+    void createUser_username_13_4() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday(null);
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //gender = null
+    @Test
+    void createUser_username_13_5() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(null);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //idCard = null
+    @Test
+    void createUser_username_13_6() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard(null);
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //name = null
+    @Test
+    void createUser_username_13_7() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName(null);
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //phone = null
+    @Test
+    void createUser_username_13_8() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga86");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone(null);
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+
+
 
     //username = ""
     @Test
@@ -71,6 +249,158 @@ public class UserController_createUser {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    //avatar_url = ""
+    @Test
+    void createUser_username_14_2() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //birthday = ""
+    @Test
+    void createUser_username_14_3() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //email = ""
+    @Test
+    void createUser_username_14_4() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //idCard = ""
+    @Test
+    void createUser_username_14_5() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //name = ""
+    @Test
+    void createUser_username_14_6() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("");
+        userCreateDTO.setPhone("0923456789");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    //phone = ""
+    @Test
+    void createUser_username_14_7() throws Exception{
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+        userCreateDTO.setUsername("lenga37");
+        userCreateDTO.setAvatarUrl("image/avatar.jpg");
+        userCreateDTO.setBirthday("1990/01/01");
+        userCreateDTO.setEmail("nga@gmail.com");
+        userCreateDTO.setGender(1);
+        userCreateDTO.setIdCard("125678764");
+        userCreateDTO.setName("NgaLe");
+        userCreateDTO.setPhone("");
+
+        Ward ward =new Ward();
+        ward.setWardId(1);
+        userCreateDTO.setWard(ward);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/signup")
+                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+
 
     // Sai định dạng email
     @Test
@@ -147,31 +477,6 @@ public class UserController_createUser {
                 .andExpect(status().is4xxClientError());
     }
 
-    //email = null
-    @Test
-    void createUser_username_13_2() throws Exception{
-        UserCreateDTO userCreateDTO = new UserCreateDTO();
-        userCreateDTO.setUsername("lenga86");
-        userCreateDTO.setAvatarUrl("image/avatar.jpg");
-        userCreateDTO.setBirthday("1990/01/01");
-        userCreateDTO.setEmail(null);
-        userCreateDTO.setGender(1);
-        userCreateDTO.setIdCard("125678764");
-        userCreateDTO.setName("NgaLe");
-        userCreateDTO.setPhone("0923456789");
-
-        Ward ward =new Ward();
-        ward.setWardId(1);
-        userCreateDTO.setWard(ward);
-
-        this.mockMvc.perform(
-                MockMvcRequestBuilders.post("/api/signup")
-                        .content(this.objectMapper.writeValueAsString(userCreateDTO))
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().is4xxClientError());
-    }
-
     //username < minLength
     @Test
     void createUser_username_16() throws Exception{
@@ -197,7 +502,7 @@ public class UserController_createUser {
                 .andExpect(status().is4xxClientError());
     }
 
-    //username < minLength
+    //username > minLength
     @Test
     void createUser_username_17() throws Exception{
         UserCreateDTO userCreateDTO = new UserCreateDTO();
@@ -226,12 +531,12 @@ public class UserController_createUser {
     @Test
     void createUser_username_18() throws Exception{
         UserCreateDTO userCreateDTO = new UserCreateDTO();
-        userCreateDTO.setUsername("LeNga92");
+        userCreateDTO.setUsername("LeNga868692");
         userCreateDTO.setAvatarUrl("image/avatar.jpg");
         userCreateDTO.setBirthday("1990/01/01");
-        userCreateDTO.setEmail("nga12345@gmail.com");
+        userCreateDTO.setEmail("nga1234567@gmail.com");
         userCreateDTO.setGender(1);
-        userCreateDTO.setIdCard("125678788");
+        userCreateDTO.setIdCard("125678768");
         userCreateDTO.setName("NgaLe");
         userCreateDTO.setPhone("0923456789");
 
@@ -246,6 +551,4 @@ public class UserController_createUser {
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
     }
-
-
 }
