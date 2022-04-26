@@ -1,5 +1,6 @@
 package com.codegym.cinema.repository;
 
+import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -84,4 +85,10 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
      */
     @Query(value = "select * from movie where movie.movie_id = ?1", nativeQuery = true)
     Movie findMovieByMovieId(Integer id);
+
+    /**
+     * Author: DongVTH
+     */
+    @Query(value = "select * from category", nativeQuery = true)
+    List<Category> findAllCategory();
 }

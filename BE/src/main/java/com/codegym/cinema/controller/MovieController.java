@@ -1,5 +1,6 @@
 package com.codegym.cinema.controller;
 
+import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,4 +171,5 @@ public class MovieController {
         }
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
+
 }

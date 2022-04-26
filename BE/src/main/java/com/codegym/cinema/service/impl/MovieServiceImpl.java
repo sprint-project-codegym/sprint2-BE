@@ -1,5 +1,6 @@
 package com.codegym.cinema.service.impl;
 
+import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.repository.MovieRepository;
 import com.codegym.cinema.service.MovieService;
@@ -95,5 +96,13 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie getDetailMovie(Integer id) {
         return movieRepository.findMovieByMovieId(id);
+    }
+
+    /**
+     * Author: DongVTH
+     */
+    @Override
+    public List<Category> getAllCategory() {
+        return movieRepository.findAllCategory();
     }
 }
