@@ -18,7 +18,7 @@ public class MovieController {
     MovieService movieService;
 
     //NghiaND get all list movie (manage)
-    @GetMapping("/list")
+    @GetMapping("/manage/list")
     public ResponseEntity<Page<Movie>> getMovie (@RequestParam(value = "name", defaultValue = "") String name,
                                                  @RequestParam(value = "studio", defaultValue = "") String studio,
                                                  @RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -26,8 +26,8 @@ public class MovieController {
 
     {
         Pageable pageable = PageRequest.of(page, size);
-//        Page<Movie> movies  = movieService.findByNameAndStudio(pageable,name,studio);
-        Page<Movie> movies  = movieService.findAll(pageable);
+        Page<Movie> movies  = movieService.findByNameAndStudio(pageable,name,studio);
+//        Page<Movie> movies  = movieService.findAll(pageable);
         if (movies.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class MovieController {
     }
 
     //NghiaND get delete movie (manage)
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/manage/delete/{id}")
     public ResponseEntity<String> deleteMovie(@PathVariable("id") String id){
         Movie movie = movieService.findById(id);
         if (movie == null) {

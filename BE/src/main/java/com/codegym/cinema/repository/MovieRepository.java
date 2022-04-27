@@ -17,7 +17,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query(value = "select m.movie_id, m.poster_movie, m.movie_name,m.start_date, m.end_date, m.movie_studio, m.actor, m.director,m.movie_length,m.movie_type,m.trailer,m.banner, m.promote, m.description, m.movie_status, m.delete_flag from movie as m where m.delete_flag = 1", nativeQuery = true)
     Page<Movie> findAll(Pageable page);
 
-    @Query(value = "select m.movie_id, m.poster_movie, m.movie_name,m.start_date, m.end_date, m.movie_studio, m.actor, m.director,m.movie_length,m.movie_type,m.trailer,m.banner, m.promote, m.description, m.movie_status, m.delete_flag from movie as m  where m.movie_name like %?1% and m.movie_studio like %?2% and m.delete_flag = 1", nativeQuery = true)
+    @Query(value = "select m.movie_id, m.poster_movie, m.movie_name,m.start_date, m.end_date, m.movie_studio, m.actor, m.director,m.movie_length,m.movie_type,m.trailer,m.banner, m.promote, m.description, m.movie_status, m.delete_flag from movie as m  where m.movie_name like %?1% and m.movie_studio like %?2% and m.delete_flag = 1 order by m.start_date", nativeQuery = true)
     Page<Movie> findByNameAndStudio(String name, String studio, Pageable page);
 
     @Modifying
