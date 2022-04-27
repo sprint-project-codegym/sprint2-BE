@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/statistical")
 @CrossOrigin(value = "*", allowedHeaders = "*")
 public class StatisticalController {
+    
 }
