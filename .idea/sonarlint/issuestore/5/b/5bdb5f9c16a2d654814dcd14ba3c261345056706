@@ -1,0 +1,10 @@
+
+]	java:S125"<This block of commented-out lines of code should be removed.(·èÉ¦üÿÿÿÿ8ıæïª…0
+Z
+java:S1128"=Remove this unused import 'com.codegym.cinema.entity.Ticket'.(¯©•Õ8Œù††0
+c
+java:S1128"ARemove this unused import 'org.springframework.data.domain.Page'.(˜âüÿÿÿÿ8Œù††0
+g
+java:S1128"ERemove this unused import 'org.springframework.data.domain.Pageable'.(‡ë‚Öıÿÿÿÿ8Œù††0
+l
+java:S1128"JRemove this unused import 'org.springframework.data.jpa.repository.Query'.(Äºöïşÿÿÿÿ8şæïª…0

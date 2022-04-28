@@ -48,6 +48,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/repository/DistrictRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/repository/TicketRepository.java">
           <value>
             <set />
@@ -58,7 +63,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/repository/WardRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/AccountRoleService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/DistrictService.java">
           <value>
             <set />
           </value>
@@ -73,6 +88,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/WardService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/impl/AccountRoleServiceImpl.java">
           <value>
             <set />
@@ -83,12 +103,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/impl/DistrictServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/impl/TicketServiceImpl.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/BE/src/main/java/com/codegym/cinema/service/impl/WardServiceImpl.java">
           <value>
             <set />
           </value>
