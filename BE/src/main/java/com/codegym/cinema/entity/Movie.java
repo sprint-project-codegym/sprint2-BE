@@ -1,14 +1,18 @@
 package com.codegym.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movie")
 public class Movie {
 
@@ -63,6 +67,7 @@ public class Movie {
     private Boolean deleteFlag;
 
     @OneToMany(mappedBy = "movie")
+//    @JsonBackReference
     @JsonManagedReference
     private Set<MovieCategory> movieCategorySet;
 
@@ -73,5 +78,8 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     @JsonIgnore
     private Set<Comment> commentSet;
-}
 
+//    @OneToMany(mappedBy = "rating")
+////    @JsonBackReference
+//    private Set<Rating> ratingSet;
+}
