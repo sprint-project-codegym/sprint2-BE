@@ -2,6 +2,9 @@ package com.codegym.cinema.controller;
 
 import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
+import com.codegym.cinema.entity.MovieCategory;
+import com.codegym.cinema.repository.CategoryRepository;
+import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +23,9 @@ public class MovieController {
 
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    MovieCategoryRepository movieCategoryRepository;
 
     /**
      * Author: KhoaTM
@@ -171,5 +177,4 @@ public class MovieController {
         }
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
-
 }

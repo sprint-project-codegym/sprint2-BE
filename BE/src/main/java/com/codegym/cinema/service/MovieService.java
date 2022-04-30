@@ -2,6 +2,7 @@ package com.codegym.cinema.service;
 
 import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
+import com.codegym.cinema.entity.MovieCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -50,8 +51,4 @@ public interface MovieService {
      */
     Movie getDetailMovie(Integer movieId);
 
-    /**
-     * Author: DongVTH
-     */
-    List<Category> getAllCategory();
 }
