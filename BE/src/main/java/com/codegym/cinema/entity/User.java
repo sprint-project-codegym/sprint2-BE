@@ -1,6 +1,8 @@
 package com.codegym.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -52,5 +54,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Comment> commentSet;
+
+    @OneToMany(mappedBy = "rating")
+    @JsonBackReference
+    private Set<Rating> ratingSet;
 }
 

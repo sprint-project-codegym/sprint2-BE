@@ -79,4 +79,13 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Page<Movie> findByTitleAndCategoryAndDateAndShowTime(String keySearch, String categoryIdSearch,
                                                          String dateSearch, String showTimeIdSearch, Pageable pageable);
 
+
+    /**
+     * Author: DongVTH
+     */
+    @Query(value = "select *, ct.category_name from movie as mv \n" +
+            "inner join movie_category as mc on mv.movie_id = mc.movie_id \n" +
+            "inner join category as ct on ct.category_id = mc.category_id\n" +
+            "where mv.movie_id = ?1", nativeQuery = true)
+    Movie findMovieByMovieId(Integer id);
 }
