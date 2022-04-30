@@ -1,8 +1,6 @@
 package com.codegym.cinema.service;
 
-import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
-import com.codegym.cinema.entity.MovieCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -46,9 +44,9 @@ public interface MovieService {
      */
     Page<Movie> advancedSearch(String keySearch, String categoryId, String date, String showTimeId, Pageable pageable);
 
+
     /**
      * Author: DongVTH
      */
     Movie getDetailMovie(Integer movieId);
-
 }

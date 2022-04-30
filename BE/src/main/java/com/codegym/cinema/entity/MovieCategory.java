@@ -2,7 +2,6 @@ package com.codegym.cinema.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +32,6 @@ public class MovieCategory {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    @JsonBackReference
     private Category category;
 }
+
