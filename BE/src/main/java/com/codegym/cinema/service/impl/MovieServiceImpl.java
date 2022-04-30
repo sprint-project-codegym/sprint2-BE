@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService {
      * Author: KhoaTM
      */
     public static final int DEFAULT_PAGE = 0;
-    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int DEFAULT_PAGE_SIZE = 8;
 
     @Autowired
     private MovieRepository movieRepository;
