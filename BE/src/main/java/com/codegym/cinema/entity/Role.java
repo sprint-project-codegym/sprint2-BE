@@ -6,10 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "`role`",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "ROLE_UK", columnNames = "role_id")
-        })
 public class Role {
 
     @Id
