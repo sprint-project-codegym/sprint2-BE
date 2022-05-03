@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface TransactionHistoryService {
-    Page<TransactionHistory> findTransactionByUsername(String username, Pageable pageable);
+    Page<TransactionHistory> findAllTransaction(String username, Pageable pageable);
+
+    Page<TransactionHistory> findTransactionByUsername(String username, Boolean status, String startDate, String endDate, Pageable pageable);
 }

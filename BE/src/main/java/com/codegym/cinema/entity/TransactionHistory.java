@@ -26,4 +26,7 @@ public class TransactionHistory {
 
     @Column(name = "status", columnDefinition = "bit(1)")
     private boolean status;
+
+    @Column(name = "point_change", columnDefinition = "int")
+    private int pointChange;
 }

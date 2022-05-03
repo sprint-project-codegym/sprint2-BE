@@ -16,7 +16,12 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     private TransactionHistoryRepository transactionHistoryRepository;
 
     @Override
-    public Page<TransactionHistory> findTransactionByUsername(String username, Pageable pageable) {
-        return transactionHistoryRepository.findTransactionByUsername(username, pageable);
+    public Page<TransactionHistory> findAllTransaction(String username, Pageable pageable) {
+        return this.transactionHistoryRepository.findAllTransaction(username, pageable);
+    }
+
+    @Override
+    public Page<TransactionHistory> findTransactionByUsername(String username, Boolean status, String startDate, String endDate, Pageable pageable) {
+        return transactionHistoryRepository.findTransactionByUsername(username, status, startDate, endDate, pageable);
     }
 }

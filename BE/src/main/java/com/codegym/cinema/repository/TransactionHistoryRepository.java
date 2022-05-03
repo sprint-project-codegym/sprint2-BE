@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-
 public interface TransactionHistoryRepository extends JpaRepository<TransactionHistory, Integer> {
 
     /**
@@ -15,5 +14,11 @@ public interface TransactionHistoryRepository extends JpaRepository<TransactionH
     @Query(value = "select * from `account` inner join `transaction_history` on" +
             "`account`.username = `transaction_history`.username " +
             "where `account`.username =?1", nativeQuery = true)
-    Page<TransactionHistory> findTransactionByUsername(String username, Pageable pageable);
+    Page<TransactionHistory> findAllTransaction(String username, Pageable pageable);
+
+    @Query(value = "select * from `transaction_history`" +
+            " where transaction_history.username =?1 and transaction_history.status =?2" +
+            " and transaction_date between ?3 and ?4", nativeQuery = true)
+    Page<TransactionHistory> findTransactionByUsername(String username, Boolean status, String startDate, String endDate, Pageable pageable);
+
 }

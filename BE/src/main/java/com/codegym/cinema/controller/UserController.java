@@ -81,16 +81,31 @@ public class UserController {
         }
     }
 
-    @GetMapping("/member/transaction/{username}")
-    public ResponseEntity<Page<TransactionHistory>> getTransactionByUsername(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            @PathVariable(name = "username") String username) {
+    @GetMapping("/member/transaction")
+    public ResponseEntity<Page<TransactionHistory>> getTransactionByUsername(@RequestParam(defaultValue = "0") int page,
+                                                                             @RequestParam(defaultValue = "5") int size,
+                                                                             @RequestParam(defaultValue = "") String username,
+                                                                             @RequestParam(defaultValue = "") Boolean status,
+                                                                             @RequestParam(defaultValue = "") String startDate,
+                                                                             @RequestParam(defaultValue = "") String endDate) {
         Pageable pageable = PageRequest.of(page, size);
         Page<TransactionHistory> transactions;
-        transactions = transactionHistoryService.findTransactionByUsername(username, pageable);
+        transactions = transactionHistoryService.findTransactionByUsername(username, status, startDate, endDate, pageable);
         if (transactions.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
+    @GetMapping("/member/transaction-list")
+    public ResponseEntity<Page<TransactionHistory>> getAllTransaction(@RequestParam(defaultValue = "0") int page,
+                                                                      @RequestParam(defaultValue = "5") int size,
+                                                                      @RequestParam(defaultValue = "") String username) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<TransactionHistory> transactions;
+        transactions = transactionHistoryService.findAllTransaction(username, pageable);
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
