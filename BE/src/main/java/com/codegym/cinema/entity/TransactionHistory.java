@@ -21,7 +21,7 @@ public class TransactionHistory {
     @JoinColumn(name = "username", columnDefinition = "varchar(50)")
     private Account account;
 
-    @Column(name = "description", columnDefinition = "varchar(50)")
+    @Column(name = "description", columnDefinition = "varchar(255)")
     private String description;
 
     @Column(name = "status", columnDefinition = "bit(1)")

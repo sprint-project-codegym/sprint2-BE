@@ -99,7 +99,7 @@ public class UserController {
 
     @GetMapping("/member/transaction-list")
     public ResponseEntity<Page<TransactionHistory>> getAllTransaction(@RequestParam(defaultValue = "0") int page,
-                                                                      @RequestParam(defaultValue = "5") int size,
+                                                                      @RequestParam(defaultValue = "20") int size,
                                                                       @RequestParam(defaultValue = "") String username) {
         Pageable pageable = PageRequest.of(page, size);
         Page<TransactionHistory> transactions;
