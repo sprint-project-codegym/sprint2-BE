@@ -1,11 +1,8 @@
 package com.codegym.cinema.service.impl;
 
-import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
-import com.codegym.cinema.entity.MovieCategory;
 import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.repository.MovieRepository;
-import com.codegym.cinema.service.MovieCategoryService;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
