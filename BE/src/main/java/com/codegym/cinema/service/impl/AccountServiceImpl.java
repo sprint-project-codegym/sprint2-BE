@@ -44,6 +44,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findByUsernameToResetPassword(String username) {
+        return accountRepository.findByUsernameToResetPassword(username);
+    }
+
+    @Override
     public void addVerifyCode(String username) throws MessagingException {
         String code = new Random().nextInt(900000) + 100000 + "";
         accountRepository.addVerifyCode(code, username);
@@ -78,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
     public void saveSocialAccount(Account account) {
         accountRepository.saveSocialAccount(
                 account.getUsername(), account.getPassword(),
-                account.getIsEnable(), LocalDate.now());
+                account.getIsEnable(), LocalDate.now(),account.getProvider());
         accountRoleRepository.setDefaultRole(account.getUsername());
     }
 }

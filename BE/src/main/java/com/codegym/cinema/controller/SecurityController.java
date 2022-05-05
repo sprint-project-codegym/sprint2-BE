@@ -94,9 +94,12 @@ public class SecurityController {
 
     @PostMapping("/send-verification-email")
     public ResponseEntity<Object> reset(@RequestBody ForgotPasswordRequest forgotPasswordRequest) throws MessagingException, UnsupportedEncodingException {
+        Account account = null;
         if (userService.findUserByEmail(forgotPasswordRequest.getEmail()) != null) {
             User user = userService.findUserByEmail(forgotPasswordRequest.getEmail());
-            Account account = accountService.findAccountByUsername(user.getAccount().getUsername());
+            account = accountService.findByUsernameToResetPassword(user.getAccount().getUsername());
+        }
+        if(account!=null) {
             accountService.addVerifyCode(account.getUsername());
             return ResponseEntity.ok(new MessageResponse("Đã gửi email xác nhận"));
         }
@@ -144,6 +147,7 @@ public class SecurityController {
 
             Account account = new Account();
             account.setUsername(payload.get("email").toString());
+            account.setProvider("GOOGLE");
             return setDefaultPassword(tokenSocialRequest, user, account);
         }
         return getResponseSocialLogin(user);
@@ -167,6 +171,7 @@ public class SecurityController {
 
             Account account = new Account();
             account.setUsername(userFacebook.getEmail());
+            account.setProvider("FACEBOOK");
             return setDefaultPassword(tokenSocialRequest, user, account);
         }
         return getResponseSocialLogin(user);

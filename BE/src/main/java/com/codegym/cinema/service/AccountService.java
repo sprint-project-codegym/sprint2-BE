@@ -11,6 +11,8 @@ public interface AccountService {
 
     Account findAccountByUsername(String username);
 
+    Account findByUsernameToResetPassword(String username);
+
     void addVerifyCode(String username) throws MessagingException;
 
     void sendMailToResetPassword(String email, String code) throws MessagingException;

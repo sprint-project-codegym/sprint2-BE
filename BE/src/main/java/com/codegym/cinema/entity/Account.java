@@ -44,6 +44,9 @@ public class Account {
     @Column(name = "is_enable", columnDefinition = "bit(1)")
     private Boolean isEnable;
 
+    @Column(name = "provider", columnDefinition = "VARCHAR(20)")
+    private String provider;
+
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private Set<TransactionHistory> transactionHistorySet;
