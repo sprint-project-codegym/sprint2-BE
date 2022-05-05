@@ -18,4 +18,8 @@ public interface AccountRepository  extends JpaRepository<Account, String> {
                        @Param("password") String password,
                        @Param("registerDate") LocalDate registerDate,
                        @Param("accountStatusId") String accountStatus);
+
+    @Query(value = "update account set verification_code=? where username=? ", nativeQuery = true)
+    @Modifying
+    void addVerifyToVerifyAccount(String code, String username);
 }

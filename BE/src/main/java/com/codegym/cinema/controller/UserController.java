@@ -2,6 +2,7 @@ package com.codegym.cinema.controller;
 
 import com.codegym.cinema.dto.UserDTO;
 import com.codegym.cinema.entity.Ticket;
+import com.codegym.cinema.entity.User;
 import com.codegym.cinema.service.AccountRoleService;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,8 +28,9 @@ public class UserController {
     @Autowired
     private AccountRoleService accountRoleService;
 
-    @PostMapping(value = "/signup")
-    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO, BindingResult bindingResult) {
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+        System.out.println(1111);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
         }
@@ -48,8 +51,18 @@ public class UserController {
             userService.createUser(userDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.CONFLICT);
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
+        User user = userService.findUserByUsername(username);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 

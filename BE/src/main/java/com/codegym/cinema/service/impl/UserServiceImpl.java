@@ -7,13 +7,16 @@ import com.codegym.cinema.entity.User;
 import com.codegym.cinema.repository.AccountRepository;
 import com.codegym.cinema.repository.AccountRoleRepository;
 import com.codegym.cinema.repository.UserRepository;
+import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -29,8 +32,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    AccountService accountService;
+
     @Override
-    public void createUser(UserDTO userDTO) {
+    public void createUser(UserDTO userDTO) throws UnsupportedEncodingException, MessagingException {
         Account account = new Account();
         account.setUsername(userDTO.getUsername());
         account.setPassword(userDTO.getPassword());
@@ -53,6 +60,8 @@ public class UserServiceImpl implements UserService {
                 user.getIdCard(),user.getName(), user.getPhone(),user.getAccount().getUsername(),user.getWard().getWardId());
 
         this.accountRoleRepository.saveAccountRole(account.getUsername(), 3);
+
+//        this.accountService.addVerifyToVerifyAccount(account.getUsername(), user.getEmail());
     }
 
     @Override
@@ -69,6 +78,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
+
 
 //    @Override
 //    public Boolean existsUsersByUsername(String username) {

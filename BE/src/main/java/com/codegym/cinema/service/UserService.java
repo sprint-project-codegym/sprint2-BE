@@ -8,8 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+
 public interface UserService {
-    void createUser(UserDTO userDTO);
+    void createUser(UserDTO userDTO) throws UnsupportedEncodingException, MessagingException;
 
     User findUserByUsername(@Param("username") String username);
 

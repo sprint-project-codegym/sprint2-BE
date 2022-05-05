@@ -29,13 +29,13 @@ public class User {
     @Column(name = "gender", columnDefinition = "int")
     private Integer gender;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(50)")
+    @Column(name = "email", columnDefinition = "VARCHAR(50) UNIQUE")
     private String email;
 
     @Column(name = "phone", columnDefinition = "VARCHAR(20)")
     private String phone;
 
-    @Column(name = "id_card", columnDefinition = "VARCHAR(20)")
+    @Column(name = "id_card", columnDefinition = "VARCHAR(20) UNIQUE")
     private String idCard;
 
     @Column(name = "avatar_url", columnDefinition = "VARCHAR(255)")

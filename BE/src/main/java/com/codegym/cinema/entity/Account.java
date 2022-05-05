@@ -33,6 +33,9 @@ public class Account {
     @Column(name = "point", columnDefinition = "varchar(50)")
     private String point;
 
+    @Column(name = "verification_code", columnDefinition = "varchar(100)")
+    private String verificationCode;
+
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private Set<TransactionHistory> transactionHistorySet;
