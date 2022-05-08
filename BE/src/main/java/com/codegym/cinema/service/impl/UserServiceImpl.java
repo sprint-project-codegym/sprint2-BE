@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
         this.accountRoleRepository.saveAccountRole(account.getUsername(), 3);
 
-//        this.accountService.addVerifyToVerifyAccount(account.getUsername(), user.getEmail());
+        this.accountService.addVerifyToVerifyAccount(account.getUsername(), user.getEmail());
     }
 
     @Override

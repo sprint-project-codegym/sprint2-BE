@@ -14,7 +14,7 @@ public class UserDTO {
     private String birthday;
 
     @NotBlank(message = "Email không được để trống!")
-    @Email(message = "Email không đúng định dạng")
+//    @Email(message = "Email không đúng định dạng")
     private String email;
 
     @NotNull(message = "Giới tính không được để trống!")

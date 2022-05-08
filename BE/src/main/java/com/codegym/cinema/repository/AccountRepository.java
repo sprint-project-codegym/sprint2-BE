@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public interface AccountRepository  extends JpaRepository<Account, String> {
     //NgaLT query thêm mới account
@@ -22,4 +22,18 @@ public interface AccountRepository  extends JpaRepository<Account, String> {
     @Query(value = "update account set verification_code=? where username=? ", nativeQuery = true)
     @Modifying
     void addVerifyToVerifyAccount(String code, String username);
+
+    @Transactional
+    @Query(value = "select * from account where verification_code=?", nativeQuery = true)
+    Account findAccountByVerificationCode(String code);
+
+    @Transactional
+    @Query(value = "update account set account_status=1  where username=? ", nativeQuery = true)
+    @Modifying
+    void activeAccount(String username);
+
+    @Transactional
+    @Query(value = "update account set verification_code=null where username=? ", nativeQuery = true)
+    @Modifying
+    void deleteVerifyCode(String username);
 }

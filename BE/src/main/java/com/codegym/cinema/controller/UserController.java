@@ -1,14 +1,13 @@
 package com.codegym.cinema.controller;
 
 import com.codegym.cinema.dto.UserDTO;
-import com.codegym.cinema.entity.Ticket;
+import com.codegym.cinema.entity.Account;
 import com.codegym.cinema.entity.User;
+import com.codegym.cinema.payload.response.MessageResponse;
 import com.codegym.cinema.service.AccountRoleService;
+import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -24,6 +23,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private AccountRoleService accountRoleService;
@@ -55,6 +57,19 @@ public class UserController {
 //            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/verify-account")
+    public ResponseEntity<Object> checkCode(@RequestParam String code){
+        Account account = accountService.findAccountByVerificationCodeToActiveAccount(code);
+        if (account == null){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("account not found"));
+        }
+        accountService.activeAccount(account.getUsername());
+        return ResponseEntity.ok(new MessageResponse("actived"));
+    }
+
 
     @GetMapping("/user/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
