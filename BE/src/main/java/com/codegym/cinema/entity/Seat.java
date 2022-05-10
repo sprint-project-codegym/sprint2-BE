@@ -34,4 +34,6 @@ public class Seat {
     @JsonIgnore
     private Set<Ticket> ticketSet;
 
+
+
 }

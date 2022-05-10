@@ -18,7 +18,7 @@ public interface UserService {
 
     User findUserByIdCard(@Param("idCard") String idCard);
 
-    User findUserByEmail(@Param("email") String email);
+    User findByEmail(@Param("email") String email);
 
 //    Boolean existsUsersByUsername(String username);
 //

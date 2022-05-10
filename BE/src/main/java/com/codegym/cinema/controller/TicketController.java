@@ -20,7 +20,7 @@ public class TicketController {
     //NgaLT get all booked ticket
     @GetMapping("/booked")
     public ResponseEntity<Page<Ticket>> findAllBookedTicketWithPagination(@RequestParam(defaultValue = "0") int page,
-                                                                          @RequestParam(defaultValue = "1") int size) {
+                                                                          @RequestParam(defaultValue = "3") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Ticket> tickets = ticketService.findAllBookedTicket(pageable);
         if (tickets.isEmpty()) {

@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class UserController {
     private AccountRoleService accountRoleService;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) throws UnsupportedEncodingException, MessagingException {
         System.out.println(1111);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
@@ -44,7 +46,7 @@ public class UserController {
             if (userService.findUserByIdCard(userDTO.getIdCard()) != null) {
                 listError.put("existIdCard", "Số CMND đã tồn tại. Vui lòng nhập số CMND khác.");
             }
-            if (userService.findUserByEmail(userDTO.getEmail()) != null) {
+            if (userService.findByEmail(userDTO.getEmail()) != null) {
                 listError.put("existEmail", "Email đã tồn tại. Vui lòng nhập số email khác.");
             }
             if (!listError.isEmpty()) {
@@ -54,7 +56,6 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.CONFLICT);
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
