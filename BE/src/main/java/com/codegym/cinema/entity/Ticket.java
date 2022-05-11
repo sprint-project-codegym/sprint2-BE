@@ -1,11 +1,15 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ticket")
 public class Ticket {
 
@@ -16,6 +20,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "movie_ticket_id", referencedColumnName = "movie_ticket_id")
+    @JsonBackReference
     private MovieTicket movieTicket;
 
     @ManyToOne

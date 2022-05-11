@@ -1,11 +1,14 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "`role`",
         uniqueConstraints = {
                 @UniqueConstraint(name = "ROLE_UK", columnNames = "role_id")

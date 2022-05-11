@@ -2,12 +2,15 @@ package com.codegym.cinema.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "movie_category",
         uniqueConstraints = {
                 @UniqueConstraint(name = "CATEGORY_UK", columnNames = {"category_id", "movie_id"})

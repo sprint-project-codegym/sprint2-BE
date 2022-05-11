@@ -1,13 +1,17 @@
 package com.codegym.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "movie_ticket")
 public class MovieTicket {
 
@@ -38,7 +42,7 @@ public class MovieTicket {
     private Room room;
 
     @OneToMany(mappedBy = "movieTicket")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<Ticket> ticketSet;
 }
 

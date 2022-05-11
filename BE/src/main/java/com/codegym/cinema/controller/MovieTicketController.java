@@ -15,7 +15,7 @@ public class MovieTicketController {
     @Autowired
     MovieTicketService movieTicketService;
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/information/{id}")
     public ResponseEntity<MovieTicket> getDetailMovie(@PathVariable("id") Integer id) {
         MovieTicket movieTicket = movieTicketService.getDetailMovieTicket(id);
         if (movieTicket == null) {
