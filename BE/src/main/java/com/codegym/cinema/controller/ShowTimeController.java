@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/showTime")
-class ShowtimeController {
+public class ShowTimeController {
+
     @Autowired
     private ShowTimeService showTimeService;
 
+    /**
+     * Author: KhoaTM
+     */
     @GetMapping("")
     public ResponseEntity<List<ShowTime>> getAllShowtimes() {
         try {

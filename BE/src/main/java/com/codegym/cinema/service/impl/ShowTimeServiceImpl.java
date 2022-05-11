@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class ShowTimeServiceImpl implements ShowTimeService {
 
-
     @Autowired
     private ShowTimeRepository showTimeRepository;
 
@@ -31,6 +30,9 @@ public class ShowTimeServiceImpl implements ShowTimeService {
         return showTimeRepository.getAllShowTimeByDateAndMovie(date, movieId);
     }
 
+    /**
+     * Author: KhoaTM
+     */
     @Override
     public List<ShowTime> findAll() {
         return showTimeRepository.findAll();
