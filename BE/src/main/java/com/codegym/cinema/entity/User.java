@@ -1,7 +1,9 @@
 package com.codegym.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,7 +13,10 @@ import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "`user`")
 public class User {
 
@@ -25,7 +30,7 @@ public class User {
     @Column(name = "name", columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
     private Account account;
 
@@ -67,5 +72,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Comment> commentSet;
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }
 

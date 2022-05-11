@@ -6,4 +6,10 @@ public interface UserService {
     User findByUsername(String username);
 
     void updateUser(User user);
+
+    User findUserByAccount_Username(String username);
+
+    User findUserByEmail(String email);
+
+    void saveSocialUser(User user);
 }
