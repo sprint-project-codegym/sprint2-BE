@@ -2,11 +2,15 @@ package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Data
 @Table(name = "movie_ticket")
 public class MovieTicket {
@@ -30,12 +34,13 @@ public class MovieTicket {
     @Column(name = "ticket_price", columnDefinition = "INT")
     private Integer ticketPrice;
 
-    @Column(name = "projection_type", columnDefinition = "varchar(50)")
-    private String projectionType;
-
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private Room room;
+
+    @ManyToOne
+    @JoinColumn(name = "projection_type_id", referencedColumnName = "projection_type_id")
+    private ProjectionType projectionType;
 
     @OneToMany(mappedBy = "movieTicket")
     @JsonIgnore

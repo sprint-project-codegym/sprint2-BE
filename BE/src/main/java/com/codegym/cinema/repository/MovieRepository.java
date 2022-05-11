@@ -11,6 +11,12 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
+    /**
+     * Author : NhungHTC
+     * function to get all movie have been add
+     */
+    @Query(value = "select * from movie", nativeQuery = true)
+    List<Movie> getAllMovie();
 
     /**
      * Author: KhoaTM

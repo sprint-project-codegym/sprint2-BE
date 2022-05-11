@@ -16,17 +16,40 @@ import java.util.Optional;
 @Service
 public class MovieServiceImpl implements MovieService {
 
+
     /**
      * Author: KhoaTM
      */
     public static final int DEFAULT_PAGE = 0;
     public static final int DEFAULT_PAGE_SIZE = 8;
 
+    /**
+     * Author: NhungHTC
+     */
     @Autowired
     private MovieRepository movieRepository;
 
+    /**
+     * Author: NhungHTC
+     */
     @Autowired
     private MovieCategoryRepository movieCategoryRepository;
+
+    /**
+     * Author: NhungHTC
+     */
+    @Override
+    public List<Movie> getAllMovie() {
+        return movieRepository.getAllMovie();
+    }
+
+    /**
+     * Author: NhungHTC
+     */
+    @Override
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
+    }
 
     /**
      * Author: KhoaTM

@@ -30,6 +30,7 @@ public class Ticket {
     @Column(name = "time_create", columnDefinition = "date")
     private String createTime;
 
-    @Column(name = "ticket_status", columnDefinition = "varchar(50)")
-    private String ticketStatus;
+    @ManyToOne
+    @JoinColumn(name = "ticket_status_id", referencedColumnName = "ticket_status_id")
+    private TicketStatus ticketStatus;
 }
