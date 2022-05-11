@@ -27,8 +27,9 @@ public class Seat {
     @JoinColumn(name = "column_id")
     private ColumnSeat column;
 
-    @Column(name = "seat_type", columnDefinition = "varchar(50)")
-    private String seatType;
+    @ManyToOne
+    @JoinColumn(name = "seat_type_id")
+    private SeatType seatType;
 
     @OneToMany(mappedBy = "seat")
     @JsonIgnore
