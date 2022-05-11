@@ -56,11 +56,12 @@ public class Movie {
     @Column(name = "`description`", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "`movie_status`", columnDefinition = "varchar(255)")
-    private String movieStatus;
-
     @Column(name = "`delete_flag`", columnDefinition = "bit(1)")
     private Boolean deleteFlag;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_status_id", referencedColumnName = "movie_status_id")
+    private MovieStatus movieStatus;
 
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
