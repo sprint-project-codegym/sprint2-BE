@@ -9,4 +9,6 @@ public interface TransactionHistoryService {
     Page<TransactionHistory> findAllTransaction(String username, Pageable pageable);
 
     Page<TransactionHistory> findTransactionByUsername(String username, Boolean status, String startDate, String endDate, Pageable pageable);
+
+    Page<TransactionHistory> findTransactionStatus(String username, Boolean status, Pageable pageable);
 }

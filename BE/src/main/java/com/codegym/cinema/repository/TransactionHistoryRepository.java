@@ -20,4 +20,8 @@ public interface TransactionHistoryRepository extends JpaRepository<TransactionH
             " and transaction_date between ?3 and ?4", nativeQuery = true)
     Page<TransactionHistory> findTransactionByUsername(String username, Boolean status, String startDate, String endDate, Pageable pageable);
 
+    @Query(value = "select * from `transaction_history`" +
+            " where transaction_history.username =?1 and transaction_history.status =?2", nativeQuery = true)
+    Page<TransactionHistory> findTransactionByStatus(String username, Boolean status, Pageable pageable);
+
 }

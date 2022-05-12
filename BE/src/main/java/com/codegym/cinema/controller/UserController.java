@@ -84,7 +84,7 @@ public class UserController {
 
     @GetMapping("/member/transaction")
     public ResponseEntity<Page<TransactionHistory>> getTransactionByUsername(@RequestParam(defaultValue = "0") int page,
-                                                                             @RequestParam(defaultValue = "5") int size,
+                                                                             @RequestParam(defaultValue = "3") int size,
                                                                              @RequestParam(defaultValue = "") String username,
                                                                              @RequestParam(defaultValue = "") Boolean status,
                                                                              @RequestParam(defaultValue = "") String startDate,
@@ -98,9 +98,23 @@ public class UserController {
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
+    @GetMapping("/member/transaction-status")
+    public ResponseEntity<Page<TransactionHistory>> getTransactionByStatus(@RequestParam(defaultValue = "0") int page,
+                                                                             @RequestParam(defaultValue = "3") int size,
+                                                                             @RequestParam(defaultValue = "") String username,
+                                                                             @RequestParam(defaultValue = "") Boolean status) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<TransactionHistory> transactions;
+        transactions = transactionHistoryService.findTransactionStatus(username, status, pageable);
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
     @GetMapping("/member/transaction-list")
     public ResponseEntity<Page<TransactionHistory>> getAllTransaction(@RequestParam(defaultValue = "0") int page,
-                                                                      @RequestParam(defaultValue = "20") int size,
+                                                                      @RequestParam(defaultValue = "3") int size,
                                                                       @RequestParam(defaultValue = "") String username) {
         Pageable pageable = PageRequest.of(page, size);
         Page<TransactionHistory> transactions;
