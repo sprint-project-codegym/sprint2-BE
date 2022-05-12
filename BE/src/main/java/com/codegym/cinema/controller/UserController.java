@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/member/editUser", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/member/editUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FieldError>> editUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
@@ -73,7 +74,7 @@ public class UserController {
         if (account == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (accountDTO.getOldPassword().equals(account.getPassword())) {
+        if (BCrypt.checkpw(accountDTO.getOldPassword(), account.getPassword())) {
             accountService.setNewPassword(accountDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {

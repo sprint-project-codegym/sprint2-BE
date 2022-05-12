@@ -9,6 +9,7 @@ import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +35,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void setNewPassword(AccountDTO accountDTO) {
-        accountDTO.setNewPassword(accountDTO.getNewPassword());
-        accountRepository.saveAccountDTO(accountDTO.getNewPassword(), accountDTO.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        accountDTO.setNewPassword(passwordEncoder.encode(accountDTO.getNewPassword()));
+        accountRepository.saveAccountDTO(accountDTO.getNewPassword(),accountDTO.getUsername());
     }
 
     @Override

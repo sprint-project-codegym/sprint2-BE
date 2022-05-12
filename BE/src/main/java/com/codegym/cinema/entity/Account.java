@@ -2,7 +2,6 @@ package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,7 +31,7 @@ public class Account {
     private boolean accountStatus;
 
     @OneToOne(mappedBy = "account")
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     @Column(name = "point", columnDefinition = "varchar(50)")
@@ -54,9 +53,4 @@ public class Account {
     @OneToMany(mappedBy = "account")
     @JsonBackReference
     private Set<AccountRole> roles;
-
-    @Override
-    public String toString() {
-        return null;
-    }
 }
