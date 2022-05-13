@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MovieController_deleteMovie {
+ class TestMovieController_deleteMovie {
 
     @Autowired
     MovieController movieController;
@@ -22,7 +22,7 @@ public class MovieController_deleteMovie {
 
     // delete movie theo id = "null"
     @Test
-    public void deleteMovie_1() throws Exception {
+     void deleteMovie_1() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/movie/manage/delete/{id}",  "null"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
@@ -30,7 +30,7 @@ public class MovieController_deleteMovie {
 
     // delete movie theo id = ""
     @Test
-    public void deleteMovie_2() throws Exception {
+     void deleteMovie_2() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/movie/manage/delete/{id}",  ""))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
@@ -38,14 +38,14 @@ public class MovieController_deleteMovie {
 
     // delete movie theo id = 2, có trong database
     @Test
-    public void deleteMovie_3() throws Exception {
+     void deleteMovie_3() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/movie/manage/delete/{id}",  "3"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
     }
     // delete movie theo id = 10, không có trong database
     @Test
-    public void deleteMovie_4() throws Exception {
+     void deleteMovie_4() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/movie/manage/delete/{id}",  "10"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());

@@ -22,12 +22,11 @@ public class MovieController {
     public ResponseEntity<Page<Movie>> getMovie (@RequestParam(value = "name", defaultValue = "") String name,
                                                  @RequestParam(value = "studio", defaultValue = "") String studio,
                                                  @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                 @RequestParam(value = "size10", defaultValue = "10") Integer size)
+                                                 @RequestParam(value = "size", defaultValue = "10") Integer size)
 
     {
         Pageable pageable = PageRequest.of(page, size);
         Page<Movie> movies  = movieService.findByNameAndStudio(pageable,name,studio);
-//        Page<Movie> movies  = movieService.findAll(pageable);
         if (movies.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

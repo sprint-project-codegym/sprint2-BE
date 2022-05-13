@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MovieController_listMovie {
+class TestMovieController_listMovie {
 
     @Autowired
     MovieController movieController;
@@ -22,7 +22,7 @@ public class MovieController_listMovie {
 
     // list theo name = "null", studio = "null"
     @Test
-    public void getListMovie_1() throws Exception {
+    void getListMovie_1() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?name={name}&studio={studio}", "null", "null"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -30,7 +30,7 @@ public class MovieController_listMovie {
 
     // list theo name = "", studio = ""
     @Test
-    public void getListMovie_2() throws Exception {
+    void getListMovie_2() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?name={name}&studio={studio}", "", ""))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -38,14 +38,14 @@ public class MovieController_listMovie {
 
     // list theo name = "null"
     @Test
-    public void getListMovie_3() throws Exception {
+    void getListMovie_3() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?name={name}", "null"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
     }
     // list theo studio = "null"
     @Test
-    public void getListMovie_4() throws Exception {
+    void getListMovie_4() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?studio={studio}",  "null"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -53,7 +53,7 @@ public class MovieController_listMovie {
 
     // list theo name = "venom"
     @Test
-    public void getListMovie_5() throws Exception {
+    void getListMovie_5() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?name={name}", "venom"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -62,7 +62,7 @@ public class MovieController_listMovie {
 
     // list theo studio = "marvel"
     @Test
-    public void getListMovie_6() throws Exception {
+    void getListMovie_6() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?studio={studio}", "marvel"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -70,7 +70,7 @@ public class MovieController_listMovie {
 
     // list theo name = "jujutsu", không tồn tại trong database
     @Test
-    public void getListMovie_7() throws Exception {
+    void getListMovie_7() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?name={name}", "jujutsu"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
@@ -78,7 +78,7 @@ public class MovieController_listMovie {
 
     // list theo studio = "disney", không tồn tại trong database
     @Test
-    public void getListMovie_8() throws Exception {
+    void getListMovie_8() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/movie/manage/list?studio={studio}", "disney"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
