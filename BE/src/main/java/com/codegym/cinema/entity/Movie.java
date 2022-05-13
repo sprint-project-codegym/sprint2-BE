@@ -2,13 +2,17 @@ package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "movie")
 public class Movie {
 
@@ -47,6 +51,7 @@ public class Movie {
     @Column(name = "trailer", columnDefinition = "varchar(255)")
     private String trailer;
 
+
     @Column(name = "banner", columnDefinition = "VARCHAR(255)")
     private String banner;
 
@@ -56,22 +61,25 @@ public class Movie {
     @Column(name = "`description`", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "`movie_status`", columnDefinition = "varchar(255)")
-    private String movieStatus;
-
-    @Column(name = "`delete_flag`", columnDefinition = "bit(1)")
-    private Boolean deleteFlag;
-
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
     private Set<MovieCategory> movieCategorySet;
 
     @OneToMany(mappedBy = "movie")
     @JsonIgnore
-    private Set<MovieTicket> movieTicketSet;
+    private Set<Rating> ratingSet;
 
     @OneToMany(mappedBy = "movie")
     @JsonIgnore
     private Set<Comment> commentSet;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonIgnore
+    private Set<MovieTicket> movieTicketSet;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_status_id", referencedColumnName = "movie_status_id")
+    private MovieStatus movieStatus;
+
 }
 

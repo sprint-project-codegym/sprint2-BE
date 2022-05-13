@@ -1,12 +1,18 @@
+
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "transaction_history")
+
 public class TransactionHistory {
 
     @Id
@@ -24,6 +30,6 @@ public class TransactionHistory {
     @Column(name = "description", columnDefinition = "varchar(50)")
     private String description;
 
-    @Column(name = "status", columnDefinition = "bit(1)")
+    @Column(name = "status", columnDefinition = "bit")
     private boolean status;
 }

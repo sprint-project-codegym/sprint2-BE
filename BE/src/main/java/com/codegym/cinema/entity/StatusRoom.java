@@ -1,4 +1,3 @@
-
 package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,18 +12,20 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "`row`")
-public class RowSeat {
+@Table(name = "status_room")
+public class StatusRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "row_id")
-    private Integer rowId;
+    @Column(name = "status_room_id")
+    private Integer statusRoomId;
 
-    @Column(name = "row_name", columnDefinition = "varchar(20)")
-    private String rowName;
+    @Column(name = "status_room_name", columnDefinition = "varchar(20)")
+    private String statusRoomName;
 
-    @OneToMany(mappedBy = "row")
+    @OneToMany(mappedBy = "statusRoom")
     @JsonIgnore
-    private Set<Seat> seatSet;
+    private Set<Room> roomSet;
+
 }
+

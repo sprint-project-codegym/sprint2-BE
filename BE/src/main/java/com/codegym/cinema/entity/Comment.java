@@ -1,11 +1,15 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "comment")
 public class Comment {
 
@@ -23,9 +27,6 @@ public class Comment {
     @Column(name = "date", columnDefinition = "DATETIME")
     private String date;
 
-    @Column(name = "rating", columnDefinition = "INT")
-    private Integer rating;
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
@@ -33,4 +34,13 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
     private Movie movie;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "comment_parent_id",referencedColumnName = "comment_id")
+//    private Comment comment;
+
+
+
+
 }

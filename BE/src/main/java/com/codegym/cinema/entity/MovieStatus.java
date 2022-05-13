@@ -13,19 +13,20 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "province")
-public class Province {
+@Table(name = "movie_status")
+public class MovieStatus {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "province_id")
-    private Integer provinceId;
+    @Column(name = "movie_status_id")
+    private Integer movieStatusId;
 
-    @Column(name = "province_name", columnDefinition = "varchar(50)")
-    private String provinceName;
+    @Column(name = "movie_status_name",columnDefinition = "varchar(50)")
+    private String movieStatusName;
 
-    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "movieStatus")
 //    @JsonManagedReference
     @JsonIgnore
-    private Set<District> districtSet;
+    private Set<Movie> movieSet;
 }
-

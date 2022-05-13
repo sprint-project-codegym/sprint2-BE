@@ -11,16 +11,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "show_time")
-public class ShowTime {
+@Table(name = "projection_type")
+public class ProjectionType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "show_time_id")
-    private Integer showTimeId;
+    @Column(name = "projection_type_id")
+    private Integer projectionId;
 
-    @Column(name = "show_time", columnDefinition = "VARCHAR(50)")
-    private String showTime;
+    @Column(name = "projection_type_name")
+    private String projectionName;
 
 }
 

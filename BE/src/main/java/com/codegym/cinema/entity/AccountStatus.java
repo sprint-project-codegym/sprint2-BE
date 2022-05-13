@@ -13,18 +13,17 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "`row`")
-public class RowSeat {
-
+@Table(name = "account_status")
+public class AccountStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "row_id")
-    private Integer rowId;
+    @Column(name = "account_status_id")
+    private Integer accountStatusId;
 
-    @Column(name = "row_name", columnDefinition = "varchar(20)")
-    private String rowName;
+    @Column(name = "account_status_name",columnDefinition = "varchar(50)")
+    private String accountStatusName;
 
-    @OneToMany(mappedBy = "row")
+    @OneToMany(mappedBy = "accountStatus")
     @JsonIgnore
-    private Set<Seat> seatSet;
+    private Set<Account> accountSet;
 }
