@@ -62,6 +62,9 @@ public class Movie {
     @Column(name = "`movie_status`", columnDefinition = "varchar(255)")
     private String movieStatus;
 
+    @Column(name = "`delete_flag`", columnDefinition = "bit(1)")
+    private Boolean deleteFlag;
+
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
     private Set<MovieCategory> movieCategorySet;
