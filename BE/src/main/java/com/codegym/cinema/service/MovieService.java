@@ -10,6 +10,16 @@ import java.util.Optional;
 public interface MovieService {
 
     /**
+     * Author: NhungHTC
+     */
+    List<Movie> getAllMovie();
+
+    /**
+     * Author: NhungHTC
+     */
+    List<Movie> findAll();
+
+    /**
      * Author: KhoaTM
      */
     Pageable getPageable(Optional<String> pageParam, Optional<String> pageSizeParam);

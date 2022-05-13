@@ -1,9 +1,6 @@
 package com.codegym.cinema.controller;
 
-import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
-import com.codegym.cinema.entity.MovieCategory;
-import com.codegym.cinema.repository.CategoryRepository;
 import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/movie")
@@ -26,6 +24,19 @@ public class MovieController {
 
     @Autowired
     MovieCategoryRepository movieCategoryRepository;
+
+    /**
+     * Author: NhungHTC
+     */
+    @GetMapping("/all_movie")
+    public ResponseEntity<List<Movie>> getAllMovie() {
+        try {
+            List<Movie> movie = movieService.getAllMovie();
+            return new ResponseEntity<>(movie, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * Author: KhoaTM
@@ -64,6 +75,7 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
 
     /**
      * Author: KhoaTM

@@ -1,11 +1,8 @@
 package com.codegym.cinema.service.impl;
 
-import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
-import com.codegym.cinema.entity.MovieCategory;
 import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.repository.MovieRepository;
-import com.codegym.cinema.service.MovieCategoryService;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,17 +16,40 @@ import java.util.Optional;
 @Service
 public class MovieServiceImpl implements MovieService {
 
+
     /**
      * Author: KhoaTM
      */
     public static final int DEFAULT_PAGE = 0;
-    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int DEFAULT_PAGE_SIZE = 8;
 
+    /**
+     * Author: NhungHTC
+     */
     @Autowired
     private MovieRepository movieRepository;
 
+    /**
+     * Author: NhungHTC
+     */
     @Autowired
     private MovieCategoryRepository movieCategoryRepository;
+
+    /**
+     * Author: NhungHTC
+     */
+    @Override
+    public List<Movie> getAllMovie() {
+        return movieRepository.getAllMovie();
+    }
+
+    /**
+     * Author: NhungHTC
+     */
+    @Override
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
+    }
 
     /**
      * Author: KhoaTM
@@ -103,7 +123,5 @@ public class MovieServiceImpl implements MovieService {
     public Movie getDetailMovie(Integer id) {
         return movieRepository.findMovieByMovieId(id);
     }
-
-
 
 }
