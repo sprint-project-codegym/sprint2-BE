@@ -1,6 +1,7 @@
 package com.codegym.cinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movie_ticket")
 public class MovieTicket {
 
@@ -43,7 +45,7 @@ public class MovieTicket {
     private ProjectionType projectionType;
 
     @OneToMany(mappedBy = "movieTicket")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<Ticket> ticketSet;
 }
 

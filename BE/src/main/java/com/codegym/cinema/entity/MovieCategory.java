@@ -1,7 +1,7 @@
 package com.codegym.cinema.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,12 +9,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movie_category",
         uniqueConstraints = {
-                @UniqueConstraint(name = "CATEGORY_UK", columnNames = {"category_id","movie_id"})
+                @UniqueConstraint(name = "CATEGORY_UK", columnNames = {"category_id", "movie_id"})
         })
 public class MovieCategory {
 
@@ -24,12 +25,12 @@ public class MovieCategory {
     private Integer movieCategoryId;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    @JsonBackReference
     private Movie movie;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-
 }
+

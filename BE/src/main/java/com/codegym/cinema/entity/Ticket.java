@@ -3,11 +3,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ticket")
 public class Ticket {
@@ -19,6 +23,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "movie_ticket_id", referencedColumnName = "movie_ticket_id")
+    @JsonBackReference
     private MovieTicket movieTicket;
 
     @ManyToOne
@@ -32,7 +37,6 @@ public class Ticket {
 
     @Column(name = "time_create",columnDefinition = "date")
     private String createTime;
-
 
     @ManyToOne
     @JoinColumn(name = "ticket_status_id", referencedColumnName = "ticket_status_id")

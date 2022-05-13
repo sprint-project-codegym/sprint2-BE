@@ -1,16 +1,20 @@
 package com.codegym.cinema.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "seat_type")
 public class SeatType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_type_id")
@@ -20,4 +24,5 @@ public class SeatType {
     @OneToMany(mappedBy = "seatType")
     @JsonIgnore
     private Set<Seat> seatSet;
+
 }

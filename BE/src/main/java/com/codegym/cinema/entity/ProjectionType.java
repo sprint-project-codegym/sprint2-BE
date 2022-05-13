@@ -21,5 +21,5 @@ public class ProjectionType {
 
     @Column(name = "projection_type_name")
     private String projectionName;
-
 }
+

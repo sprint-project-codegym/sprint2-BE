@@ -1,10 +1,14 @@
 package com.codegym.cinema.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Set;
+
+
 @Entity
 @Getter
 @Setter
@@ -21,3 +25,4 @@ public class TicketStatus {
     @JsonIgnore
     private Set<Ticket> ticketSet;
 }
+
