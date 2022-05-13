@@ -1,5 +1,6 @@
 package com.codegym.cinema.controller;
 
+
 import com.codegym.cinema.entity.MovieTicket;
 import com.codegym.cinema.service.MovieTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,20 @@ public class MovieTicketController {
     }
 
 
-     //Method: get all movie ticket by movie id - NhungHTC
+    //Method: get all movie ticket by movie id - NhungHTC
 
     @GetMapping("api/employee/saleTicket/listMovieTicket/showDate/{showDate}")
     public ResponseEntity<List<MovieTicket>> showAllMovieTicket(@PathVariable String showDate) {
 
         try {
-            List<MovieTicket> ticketList = movieTicketService.showAllMovieTicketByShowDate( showDate );
+            List<MovieTicket> ticketList = movieTicketService.showAllMovieTicketByShowDate(showDate);
             if (ticketList.isEmpty()) {
-                return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
-                return new ResponseEntity<>( ticketList, HttpStatus.OK );
+                return new ResponseEntity<>(ticketList, HttpStatus.OK);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -52,35 +53,37 @@ public class MovieTicketController {
     public ResponseEntity<List<MovieTicket>> showAllMovieTicket(@PathVariable Integer movieId, @PathVariable String showDate) {
 
         try {
-            List<MovieTicket> ticketList = movieTicketService.showAllMovieTicketByMovieIdAndShowDate( movieId, showDate );
+            List<MovieTicket> ticketList = movieTicketService.showAllMovieTicketByMovieIdAndShowDate(movieId, showDate);
             if (ticketList.isEmpty()) {
-                return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
-                return new ResponseEntity<>( ticketList, HttpStatus.OK );
+                return new ResponseEntity<>(ticketList, HttpStatus.OK);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }
-// get movie ticket by id - Nhung HTC
+
+    // get movie ticket by id - Nhung HTC
     @GetMapping("api/employee/saleTicket/movieTicket/{movieTicketId}")
     public ResponseEntity<MovieTicket> findMovieTicketById(@PathVariable Integer movieTicketId) {
         try {
-            MovieTicket movieTicket = movieTicketService.findMovieTicketById( movieTicketId );
-            return new ResponseEntity<>( movieTicket, HttpStatus.OK );
+            MovieTicket movieTicket = movieTicketService.findMovieTicketById(movieTicketId);
+            return new ResponseEntity<>(movieTicket, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-// Method: get movie ticket by select - NHungHTC
+
+    // Method: get movie ticket by select - NHungHTC
     @GetMapping("api/employee/saleTicket/movieTicket/{movieId}/{showDate}/{showTimeId}")
     public ResponseEntity<MovieTicket> findMovieTicketById(@PathVariable Integer movieId, @PathVariable String showDate, @PathVariable Integer showTimeId) {
         try {
-            MovieTicket movieTicket = movieTicketService.findMovieTicketBySelect( movieId, showDate, showTimeId );
-            return new ResponseEntity<>( movieTicket, HttpStatus.OK );
+            MovieTicket movieTicket = movieTicketService.findMovieTicketBySelect(movieId, showDate, showTimeId);
+            return new ResponseEntity<>(movieTicket, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -32,21 +32,22 @@ public class MovieTicketServiceImpl implements MovieTicketService {
 
     @Override
     public List<MovieTicket> showAllMovieTicketByShowDate(String showDate) {
-        return movieTicketRepository.showAllMovieTicketByShowDate( showDate );
+        return movieTicketRepository.showAllMovieTicketByShowDate(showDate);
     }
+
     @Override
     public List<MovieTicket> showAllMovieTicketByMovieIdAndShowDate(Integer movieId, String showDate) {
-        return movieTicketRepository.showAllMovieTicketByMovieIdAndShowDate( movieId, showDate );
+        return movieTicketRepository.showAllMovieTicketByMovieIdAndShowDate(movieId, showDate);
     }
 
     @Override
     public MovieTicket findMovieTicketById(Integer movieTicketId) {
-        return movieTicketRepository.findMovieTicketById( movieTicketId );
+        return movieTicketRepository.findMovieTicketById(movieTicketId);
     }
 
     @Override
     public MovieTicket findMovieTicketBySelect(Integer movieId, String showDate, Integer showTimeId) {
-        return movieTicketRepository.showAllMovieTicketBySelect(movieId,showDate,showTimeId );
+        return movieTicketRepository.showAllMovieTicketBySelect(movieId, showDate, showTimeId);
     }
 
     @Override

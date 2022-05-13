@@ -1,4 +1,7 @@
 package com.codegym.cinema.entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -32,7 +35,7 @@ public class Ticket {
     @JoinColumn(name = "seat_id", referencedColumnName = "seat_id")
     private Seat seat;
 
-    @Column(name = "time_create", columnDefinition = "date")
+    @Column(name = "time_create",columnDefinition = "date")
     private String createTime;
 
     @ManyToOne

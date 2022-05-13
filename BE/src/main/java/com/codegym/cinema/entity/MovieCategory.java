@@ -1,6 +1,5 @@
 package com.codegym.cinema.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

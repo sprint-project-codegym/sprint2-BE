@@ -1,8 +1,9 @@
 package com.codegym.cinema.entity;
 
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movie_ticket")
 public class MovieTicket {
 
@@ -28,7 +30,7 @@ public class MovieTicket {
     @JoinColumn(name = "show_time_id", referencedColumnName = "show_time_id")
     private ShowTime showTime;
 
-    @Column(name = "show_date", columnDefinition = "date")
+    @Column(name = "show_date",columnDefinition = "date")
     private String showDate;
 
     @Column(name = "ticket_price", columnDefinition = "INT")

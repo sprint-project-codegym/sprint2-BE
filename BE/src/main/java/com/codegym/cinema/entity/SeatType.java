@@ -1,4 +1,3 @@
-
 package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,11 +19,10 @@ public class SeatType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_type_id")
     private Integer seatTypeId;
-
     @Column(name = "seat_type_name", columnDefinition = "varchar(20)")
     private String seatTypeName;
-
     @OneToMany(mappedBy = "seatType")
     @JsonIgnore
     private Set<Seat> seatSet;
+
 }

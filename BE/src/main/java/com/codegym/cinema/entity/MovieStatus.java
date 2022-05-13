@@ -1,4 +1,3 @@
-
 package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
