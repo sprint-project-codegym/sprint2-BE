@@ -1,12 +1,16 @@
 package com.codegym.cinema.entity;
 
+import lombok.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "room")
 public class Room {
 

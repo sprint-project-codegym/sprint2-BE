@@ -26,6 +26,8 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
+    implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.4.2'
 
     /*
     HauLC

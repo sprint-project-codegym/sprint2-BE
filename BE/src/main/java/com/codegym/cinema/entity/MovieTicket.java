@@ -1,6 +1,6 @@
 package com.codegym.cinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +43,7 @@ public class MovieTicket {
     private ProjectionType projectionType;
 
     @OneToMany(mappedBy = "movieTicket")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<Ticket> ticketSet;
 }
 
