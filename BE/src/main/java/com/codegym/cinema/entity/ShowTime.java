@@ -1,11 +1,14 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "show_time")
 public class ShowTime {
 

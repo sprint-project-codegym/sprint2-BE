@@ -1,13 +1,16 @@
 package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "`seat`",
         uniqueConstraints = {
                 @UniqueConstraint(name = "SEAT_UK", columnNames = "seat_id")
@@ -27,8 +30,9 @@ public class Seat {
     @JoinColumn(name = "column_id")
     private ColumnSeat column;
 
-    @Column(name = "seat_type", columnDefinition = "varchar(50)")
-    private String seatType;
+    @ManyToOne
+    @JoinColumn(name = "seat_type_id")
+    private SeatType seatType;
 
     @OneToMany(mappedBy = "seat")
     @JsonIgnore
