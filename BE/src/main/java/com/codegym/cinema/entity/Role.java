@@ -13,6 +13,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(name = "ROLE_UK", columnNames = "role_id")
         })
+@Data
 public class Role {
 
     @Id

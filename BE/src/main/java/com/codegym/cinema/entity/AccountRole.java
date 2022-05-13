@@ -2,6 +2,7 @@ package com.codegym.cinema.entity;
 
 import lombok.*;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -14,7 +15,6 @@ import javax.persistence.*;
                 @UniqueConstraint(name = "ACC_ROLE_UK", columnNames = {"username", "role_id"})
         })
 public class AccountRole {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_role_id")
@@ -27,5 +27,4 @@ public class AccountRole {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
 }

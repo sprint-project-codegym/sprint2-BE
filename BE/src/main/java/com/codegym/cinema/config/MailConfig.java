@@ -1,5 +1,6 @@
 package com.codegym.cinema.config;
 
+import com.codegym.cinema.common.Constants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,8 +17,8 @@ public class MailConfig {
         mailSender.setPort(587);
 
         // mail FROM
-        mailSender.setUsername(MyConstants.MY_EMAIL);
-        mailSender.setPassword(MyConstants.MY_PASSWORD);
+        mailSender.setUsername(Constants.MY_EMAIL);
+        mailSender.setPassword(Constants.MY_PASSWORD);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -27,4 +28,5 @@ public class MailConfig {
 
         return mailSender;
     }
+
 }

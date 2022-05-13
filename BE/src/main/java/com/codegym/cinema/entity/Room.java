@@ -1,6 +1,8 @@
 package com.codegym.cinema.entity;
 
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.*;
 
@@ -20,8 +22,10 @@ public class Room {
     @Column(name = "room_name", columnDefinition = "varchar(50)")
     private String roomName;
 
-    @Column(name = "room_status", columnDefinition = "varchar(50)")
-    private String roomStatus;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "status_room_id", referencedColumnName = "status_room_id")
+    private StatusRoom statusRoom;
 
 }
 

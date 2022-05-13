@@ -19,8 +19,9 @@ public class RoomSeat {
     @Column(name = "room_seat_id")
     private Integer roomSeatId;
 
-    @Column(name = "seat_status")
-    private String seatStatus;
+    @ManyToOne
+    @JoinColumn(name = "seat_status_id")
+    private SeatStatus seatStatus;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
