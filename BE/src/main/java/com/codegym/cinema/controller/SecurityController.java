@@ -1,20 +1,14 @@
 package com.codegym.cinema.controller;
 
-import com.codegym.cinema.dto.SocialUserDto;
 import com.codegym.cinema.entity.Account;
 import com.codegym.cinema.entity.User;
 import com.codegym.cinema.jwt.JwtUtils;
-import com.codegym.cinema.payload.request.ForgotPasswordRequest;
-import com.codegym.cinema.payload.request.LoginRequest;
-import com.codegym.cinema.payload.request.ResetPasswordRequest;
-import com.codegym.cinema.payload.request.TokenSocialRequest;
+import com.codegym.cinema.payload.request.*;
 import com.codegym.cinema.payload.response.JwtResponse;
 import com.codegym.cinema.payload.response.MessageResponse;
 import com.codegym.cinema.service.UserService;
 import com.codegym.cinema.service.impl.AccountServiceImpl;
-import com.codegym.cinema.service.impl.MyUserDetailsImpl;
 import com.codegym.cinema.service.impl.UserDetailsServiceImpl;
-import com.codegym.cinema.service.impl.UserServiceImpl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -26,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,8 +31,6 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -80,11 +71,7 @@ public class SecurityController {
             UserDetails userDetails = userDetailsService
                     .loadUserByUsername(authentication.getName());
             String jwtToken = jwtUtils.generateToken(userDetails);
-            List<String> roles = userDetails.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-            String urlImgDefault = "https://cdyduochopluc.edu.vn/wp-content/uploads/2019/07/anh-dai-dien-FB-200-1.jpg";
-
-            User user = userService.findUserByAccount_Username(loginRequest.getUsername());
+            User user = userService.findByUsername(loginRequest.getUsername());
             return ResponseEntity.ok(new JwtResponse(jwtToken, user, userDetails.getAuthorities()));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -95,8 +82,8 @@ public class SecurityController {
     @PostMapping("/send-verification-email")
     public ResponseEntity<Object> reset(@RequestBody ForgotPasswordRequest forgotPasswordRequest) throws MessagingException, UnsupportedEncodingException {
         Account account = null;
-        if (userService.findUserByEmail(forgotPasswordRequest.getEmail()) != null) {
-            User user = userService.findUserByEmail(forgotPasswordRequest.getEmail());
+        if (userService.findByEmail(forgotPasswordRequest.getEmail()) != null) {
+            User user = userService.findByEmail(forgotPasswordRequest.getEmail());
             account = accountService.findByUsernameToResetPassword(user.getAccount().getUsername());
         }
         if(account!=null) {
@@ -108,9 +95,9 @@ public class SecurityController {
                 .body(new MessageResponse("Tài khoản không tồn tại"));
     }
 
-    @PostMapping("/check-verify-code")
-    public ResponseEntity<Object> checkCode(@RequestBody ResetPasswordRequest resetPasswordRequest) throws MessagingException, UnsupportedEncodingException {
-        Account account = accountService.findAccountByVerificationCode(resetPasswordRequest.getVerificationCode());
+    @PostMapping("/check-verification-code")
+    public ResponseEntity<Object> checkCode(@RequestBody CheckVerificationRequest checkVerificationRequest) throws MessagingException, UnsupportedEncodingException {
+        Account account = accountService.findAccountByVerificationCode(checkVerificationRequest.getVerificationCode());
         if (account == null) return ResponseEntity
                 .badRequest()
                 .body(new MessageResponse("Sai mã xác nhận"));
@@ -124,7 +111,7 @@ public class SecurityController {
                 .badRequest()
                 .body(new MessageResponse("Sai mã xác nhận"));
 
-        accountService.updatePassword(bCryptPasswordEncoder.encode(resetPasswordRequest.getNewPassword()), account.getUsername());
+        accountService.updatePassword(bCryptPasswordEncoder.encode(resetPasswordRequest.getConfirmPassword()), account.getUsername());
         return ResponseEntity.ok(new MessageResponse("ĐỔi mật khẩu thành công"));
     }
 
@@ -138,7 +125,7 @@ public class SecurityController {
         final GoogleIdToken googleIdToken = GoogleIdToken.parse(builder.getJsonFactory(), tokenSocialRequest.getToken());
         final GoogleIdToken.Payload payload = googleIdToken.getPayload();
 
-        User user = userService.findUserByEmail(payload.getEmail());
+        User user = userService.findByEmail(payload.getEmail());
         if (user == null) {
             user = new User();
             user.setName(payload.get("name").toString());
@@ -160,7 +147,7 @@ public class SecurityController {
         org.springframework.social.facebook.api.User userFacebook = facebook.fetchObject("me", org.springframework.social.facebook.api.User.class, fields);
 
 
-        User user = userService.findUserByEmail(userFacebook.getEmail());
+        User user = userService.findByEmail(userFacebook.getEmail());
         if (user == null) {
             String urlImg = facebook.getBaseGraphApiUrl() + userFacebook.getId() + "/picture";
 
@@ -198,5 +185,10 @@ public class SecurityController {
         String jwtToken = jwtUtils.generateToken(userDetails);
         JwtResponse jwtResponse = new JwtResponse(jwtToken, user, userDetails.getAuthorities());
         return ResponseEntity.ok(jwtResponse);
+    }
+
+    @GetMapping("/admin/test")
+    private ResponseEntity<?> adminTest(){
+        return ResponseEntity.ok(new MessageResponse("ok"));
     }
 }

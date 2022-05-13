@@ -32,7 +32,7 @@ public class Account {
     private String accountStatus;
 
     @OneToOne(mappedBy = "account")
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     @Column(name = "point", columnDefinition = "varchar(50)")

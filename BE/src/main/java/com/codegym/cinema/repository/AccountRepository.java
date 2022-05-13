@@ -4,6 +4,7 @@ import com.codegym.cinema.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -12,6 +13,9 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 //    @Modifying
 //    @Query(value = "select * from account where username = ?", nativeQuery = true)
+    /*
+    * HauLC
+    * */
     Account findByUsername(String username);
 
     @Query(value="select * from account where username = ? and provider is null", nativeQuery = true)
@@ -40,4 +44,23 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     @Modifying
     @Query(value="insert into account(username,password,is_enable,register_date,provider) value (?,?,?,?,?)", nativeQuery=true)
     void saveSocialAccount(String username, String password, Boolean enable, LocalDate register_date,String provider);
+
+    //NgaLT query thêm mới account
+    @Modifying
+    @Query(value = "INSERT INTO Account (`username`, `password`, `register_date`, `account_status`) " +
+            "values (?1,?2,?3,?4)",nativeQuery = true)
+    void createAccount(@Param("username") String username,
+                       @Param("password") String password,
+                       @Param("registerDate") LocalDate registerDate,
+                       @Param("accountStatusId") String accountStatus);
+
+    @Transactional
+    @Query(value = "update account set account_status=1  where username=? ", nativeQuery = true)
+    @Modifying
+    void activeAccount(String username);
+
+    @Query(value = "update account set verification_code=? where username=? ", nativeQuery = true)
+    @Modifying
+    void addVerifyCodeToVerifyAccount(String code, String username);
+
 }

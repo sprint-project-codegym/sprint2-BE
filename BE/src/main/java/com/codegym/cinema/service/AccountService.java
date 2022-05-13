@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 public interface AccountService {
     void updatePassword(String password, String username);
@@ -22,5 +23,11 @@ public interface AccountService {
     void deleteVerifyCode(String username);
 
     void saveSocialAccount(Account account);
+
+    /*NgaLT*/
+    void  addVerifyCodeToVerifyAccount(String username, String email) throws UnsupportedEncodingException, MessagingException;
+    void activeAccount(String username);
+    void sendMailToVerifyAccount(String username, String email, String randomCode) throws MessagingException, UnsupportedEncodingException;
+
 
 }
