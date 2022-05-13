@@ -72,10 +72,46 @@ public class PaypalServiceImpl implements PaypalService {
         helper.setFrom("leconghaufake4@gmail.com", "A03Cinema");
         helper.setSubject(subject);
         mailContent = "<p sytle='color:red;'>Xin chào " + tickets.get(0).getUser().getName() + " ,<p>" + "<p> Thông tin đặt vé của bạn:</p>" +
-                "<p>Tên phim: "+movieTicket.getMovie().getMovieName() +"</p>" +
-                "<p>Thời gian: "+movieTicket.getShowTime().getShowTime() + " Ngày: "+movieTicket.getShowDate() +"</p>" +
-                "<p>Ghế: "+tickets.get(0).getSeat().getRow().getRowName()+""+tickets.get(0).getSeat().getColumn().getColumnName()+"</p>" +
-                "<p>Gía tiền: "+movieTicket.getTicketPrice()+"</p>"
+                "<b>Mã vé: "+movieTicket.getMovieTicketId() +"</b>" +
+
+                "<div style=\"top: 0px;width: 100%;background-color: #f1f1f1;padding: 10px;margin-bottom: 15px;\">" +
+                    "<section style=\"clear: both;min-height: 0;box-sizing: border-box;margin: 0;width: 100%;display: inline-block;\">" +
+                        "<div class=\"row\">" +
+                            "<div class=\"col-12\" style=\"text-align: center\">" +
+                                "<img src="+ movieTicket.getMovie().getPosterMovie()+">" +
+                            "</div>" +
+                            "<div class=\"col-12\">" +
+                                "<div class=\"ticket-detail\">" +
+                                    "<h2 class=\"ticket-title\" style=\"text-transform: uppercase!important;\">" + movieTicket.getMovie().getMovieName() + "</h2>" +
+                                    "<div class=\"ticket-info\">" +
+                                        "<p>" +
+                                            "<b>Rạp: &nbsp;</b>" +
+                                            "A032I1&nbsp; | PHÒNG CHIẾU: " + movieTicket.getRoom().getRoomName() + "&nbsp;" +
+                                        "</p>" +
+                                        "<p>" +
+                                            "<b>Suất chiếu: &nbsp;</b>" +
+                                            movieTicket.getShowTime().getShowTime() + " | "+movieTicket.getShowDate()  +
+                                        "</p>" +
+                                        "<p>" +
+                                            "<b>Loại chiếu:  &nbsp;</b>" +
+                                            movieTicket.getProjectionType() +
+                                        "</p>" +
+                                        "<p>" +
+                                            "<b>Ghế:  &nbsp;</b>" +
+                                            tickets.get(0).getSeat().getRow().getRowName()+""+tickets.get(0).getSeat().getColumn().getColumnName() +
+                                        "</p>" +
+                                    "</div>" +
+                                    "<div>" +
+                                        "<p>" +
+                                            "<b style=\"size: 30px\">Tổng: &nbsp;</b>" +
+                                            "<span style=\"size: 30px; color: red\">" + movieTicket.getTicketPrice() +
+                                        "</p>" +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
+                    "</section>" +
+                "</div>"
         ;
         helper.setText(mailContent, true);
         javaMailSender.send(message);
