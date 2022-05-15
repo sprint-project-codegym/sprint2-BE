@@ -10,6 +10,7 @@ import com.codegym.cinema.repository.UserRepository;
 import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -35,6 +36,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public User findByUsername(String username) {
         return userRepository.findUserByAccount_Username(username);
@@ -56,10 +60,9 @@ public class UserServiceImpl implements UserService {
     public void createUser(UserDTO userDTO) throws UnsupportedEncodingException, MessagingException {
         Account account = new Account();
         account.setUsername(userDTO.getUsername());
-        account.setPassword(userDTO.getPassword());
-        account.setAccountStatus("2");
+        account.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         account.setRegisterDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        this.accountRepository.createAccount(account.getUsername(),account.getPassword(), LocalDate.now(), account.getAccountStatus());
+        this.accountRepository.createAccount(account.getUsername(),account.getPassword(), LocalDate.now());
 
         User user = new User();
 

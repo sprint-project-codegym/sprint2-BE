@@ -47,15 +47,14 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
     //NgaLT query thêm mới account
     @Modifying
-    @Query(value = "INSERT INTO Account (`username`, `password`, `register_date`, `account_status`) " +
-            "values (?1,?2,?3,?4)",nativeQuery = true)
+    @Query(value = "INSERT INTO Account (`username`, `password`, `register_date`, `is_enable`) " +
+            "values (?1,?2,?3,0)",nativeQuery = true)
     void createAccount(@Param("username") String username,
                        @Param("password") String password,
-                       @Param("registerDate") LocalDate registerDate,
-                       @Param("accountStatusId") String accountStatus);
+                       @Param("registerDate") LocalDate registerDate);
 
     @Transactional
-    @Query(value = "update account set account_status=1  where username=? ", nativeQuery = true)
+    @Query(value = "update account set is_enable=1  where username=? ", nativeQuery = true)
     @Modifying
     void activeAccount(String username);
 
