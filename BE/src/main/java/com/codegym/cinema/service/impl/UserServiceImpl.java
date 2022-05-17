@@ -60,6 +60,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(int id, UserDTO userDTO) {
-        userRepository.saveUser(id, userDTO.getName(), userDTO.getBirthday(), userDTO.getGender(), userDTO.getEmail(), userDTO.getPhone(), userDTO.getIdCard(), userDTO.getAvatarUrl(), userDTO.getWardId());
+        if(userDTO.getAvatarUrl().equals("")) {
+            String avatarUrl = userRepository.getById(id).getAvatarUrl();
+            userDTO.setAvatarUrl(avatarUrl);
+        }
+        userRepository.saveUser(id,  userDTO.getName() , userDTO.getBirthday(), userDTO.getGender(), userDTO.getEmail(), userDTO.getPhone(), userDTO.getIdCard(), userDTO.getAvatarUrl(), userDTO.getWard().getWardId());
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 }
