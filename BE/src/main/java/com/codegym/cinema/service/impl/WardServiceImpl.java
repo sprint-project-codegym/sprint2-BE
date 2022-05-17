@@ -1,0 +1,25 @@
+package com.codegym.cinema.service.impl;
+
+import com.codegym.cinema.entity.Ward;
+import com.codegym.cinema.repository.WardRepository;
+import com.codegym.cinema.service.WardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class WardServiceImpl implements WardService {
+    @Autowired
+    WardRepository wardRepository;
+
+    @Override
+    public List<Ward> findAll() {
+        return wardRepository.findAll();
+    }
+
+    @Override
+    public List<Ward> findByDistrictId(int districtId) {
+        return wardRepository.findByDistrictId(districtId);
+    }
+}
