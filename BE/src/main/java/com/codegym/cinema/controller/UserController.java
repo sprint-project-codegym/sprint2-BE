@@ -7,7 +7,13 @@ import com.codegym.cinema.entity.User;
 import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.TransactionHistoryService;
 import com.codegym.cinema.dto.user.UserDTO;
+import com.codegym.cinema.entity.District;
+import com.codegym.cinema.entity.Province;
+import com.codegym.cinema.entity.Ward;
+import com.codegym.cinema.service.DistrictService;
+import com.codegym.cinema.service.ProvinceService;
 import com.codegym.cinema.service.UserService;
+import com.codegym.cinema.service.WardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +45,14 @@ public class UserController {
 
     @Autowired
     private TransactionHistoryService transactionHistoryService;
+
+    @Autowired
+    DistrictService districtService;
+
+    @Autowired
+    ProvinceService provinceService;
+    @Autowired
+    WardService wardService;
 
     @GetMapping("/member/user/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable(name = "username") String username) {
@@ -136,7 +150,7 @@ public class UserController {
                                               @RequestParam(value = "size", defaultValue = "5") Integer size) {
         Page<User> users = null;
         try {
-            Pageable pageable = PageRequest.of(page, size);
+            Pageable pageable = PageRequest.of(page, 2);
             users = userService.findByNameUserAndIdCardAndPhoneAndAddress(name, idCard, phone, pageable);
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,14 +162,65 @@ public class UserController {
     }
 
     @PutMapping("/member/user/edit/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+        User user = null;
+        try {
+            user = userService.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PutMapping("/memberuser/edit/{id}")
     public ResponseEntity<List<FieldError>> editUser(@PathVariable("id") int id,
                                                      @Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+        try {
+            if (bindingResult.hasErrors()) {
+                return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+            }
+            userService.updateUser(id, userDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        userService.updateUser(id, userDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+    @GetMapping("/memberuser/province")
+    public ResponseEntity<List<Province>> getListProvince() {
+        List<Province> provinces = null;
+        try {
+            provinces = provinceService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(provinces, HttpStatus.OK);
+    }
+
+    @GetMapping("/memberuser/district")
+    public ResponseEntity<List<District>> getListDistrict(@RequestParam(value = "provinceId", defaultValue = "") String provinceId) {
+        List<District> districts = null;
+        try {
+            districts = districtService.findByProvinceId(Integer.parseInt(provinceId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(districts, HttpStatus.OK);
+    }
+
+    @GetMapping("/memberuser/ward")
+    public ResponseEntity<List<Ward>> getListWard(@RequestParam(value = "districtId", defaultValue = "") String districtId) {
+        List<Ward> wards = null;
+        try {
+            wards = wardService.findByDistrictId(Integer.parseInt(districtId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(wards, HttpStatus.OK);
+    }
 }
 

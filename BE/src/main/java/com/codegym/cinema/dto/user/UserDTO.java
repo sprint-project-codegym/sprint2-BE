@@ -1,6 +1,7 @@
 package com.codegym.cinema.dto.user;
 
 
+import com.codegym.cinema.entity.Ward;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,10 +33,8 @@ public class UserDTO {
     @NotBlank(message = "Trường này không được để trống!")
     private String idCard;
 
-    @NotBlank(message = "Trường này không được để trống!")
     private String avatarUrl;
 
-    @Min(value = 1, message = "Trường này không được để trống!")
-    private int wardId;
+    private Ward ward;
 
 }

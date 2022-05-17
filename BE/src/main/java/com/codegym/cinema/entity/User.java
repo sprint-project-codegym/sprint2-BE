@@ -74,5 +74,6 @@ public class User {
     @OneToMany(mappedBy = "rating")
     @JsonIgnore
     private Set<Rating> ratingSet;
+
 }
 
