@@ -6,6 +6,7 @@ import com.codegym.cinema.entity.TransactionHistory;
 import com.codegym.cinema.entity.User;
 import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.TransactionHistoryService;
+import com.codegym.cinema.dto.user.UserDTO;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import org.springframework.validation.annotation.Validated;
 
 
 @RestController
@@ -124,5 +127,35 @@ public class UserController {
         }
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
+
+    @GetMapping("/member/user/list")
+    public ResponseEntity<Page<User>> getUser(@RequestParam(value = "name", defaultValue = "") String name,
+                                              @RequestParam(value = "idCard", defaultValue = "") String idCard,
+                                              @RequestParam(value = "phone", defaultValue = "") String phone,
+                                              @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                              @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        Page<User> users = null;
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            users = userService.findByNameUserAndIdCardAndPhoneAndAddress(name, idCard, phone, pageable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (users == null || users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PutMapping("/member/user/edit/{id}")
+    public ResponseEntity<List<FieldError>> editUser(@PathVariable("id") int id,
+                                                     @Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        userService.updateUser(id, userDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
 

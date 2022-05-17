@@ -1,9 +1,13 @@
 package com.codegym.cinema.service.impl;
 
+
+import com.codegym.cinema.dto.user.UserDTO;
 import com.codegym.cinema.entity.User;
 import com.codegym.cinema.repository.UserRepository;
 import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -48,4 +52,14 @@ public class UserServiceImpl implements UserService {
                 user.getEmail(), user.getEmail());
     }
 
+
+    @Override
+    public Page<User> findByNameUserAndIdCardAndPhoneAndAddress(String name, String idCard, String phone, Pageable pageable) {
+        return userRepository.findByNameUserAndIdCardAndPhoneAndAddress(name, idCard, phone, pageable);
+    }
+
+    @Override
+    public void updateUser(int id, UserDTO userDTO) {
+        userRepository.saveUser(id, userDTO.getName(), userDTO.getBirthday(), userDTO.getGender(), userDTO.getEmail(), userDTO.getPhone(), userDTO.getIdCard(), userDTO.getAvatarUrl(), userDTO.getWardId());
+    }
 }
