@@ -6,7 +6,14 @@ import com.codegym.cinema.entity.TransactionHistory;
 import com.codegym.cinema.entity.User;
 import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.TransactionHistoryService;
+import com.codegym.cinema.dto.user.UserDTO;
+import com.codegym.cinema.entity.District;
+import com.codegym.cinema.entity.Province;
+import com.codegym.cinema.entity.Ward;
+import com.codegym.cinema.service.DistrictService;
+import com.codegym.cinema.service.ProvinceService;
 import com.codegym.cinema.service.UserService;
+import com.codegym.cinema.service.WardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +29,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -36,6 +45,14 @@ public class UserController {
 
     @Autowired
     private TransactionHistoryService transactionHistoryService;
+
+    @Autowired
+    DistrictService districtService;
+
+    @Autowired
+    ProvinceService provinceService;
+    @Autowired
+    WardService wardService;
 
     @GetMapping("/member/user/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable(name = "username") String username) {
@@ -123,6 +140,87 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
+    @GetMapping("/member/user/list")
+    public ResponseEntity<Page<User>> getUser(@RequestParam(value = "name", defaultValue = "") String name,
+                                              @RequestParam(value = "idCard", defaultValue = "") String idCard,
+                                              @RequestParam(value = "phone", defaultValue = "") String phone,
+                                              @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                              @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        Page<User> users = null;
+        try {
+            Pageable pageable = PageRequest.of(page, 2);
+            users = userService.findByNameUserAndIdCardAndPhoneAndAddress(name, idCard, phone, pageable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (users == null || users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PutMapping("/member/user/edit/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+        User user = null;
+        try {
+            user = userService.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PutMapping("/memberuser/edit/{id}")
+    public ResponseEntity<List<FieldError>> editUser(@PathVariable("id") int id,
+                                                     @Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+            }
+            userService.updateUser(id, userDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/memberuser/province")
+    public ResponseEntity<List<Province>> getListProvince() {
+        List<Province> provinces = null;
+        try {
+            provinces = provinceService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(provinces, HttpStatus.OK);
+    }
+
+    @GetMapping("/memberuser/district")
+    public ResponseEntity<List<District>> getListDistrict(@RequestParam(value = "provinceId", defaultValue = "") String provinceId) {
+        List<District> districts = null;
+        try {
+            districts = districtService.findByProvinceId(Integer.parseInt(provinceId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(districts, HttpStatus.OK);
+    }
+
+    @GetMapping("/memberuser/ward")
+    public ResponseEntity<List<Ward>> getListWard(@RequestParam(value = "districtId", defaultValue = "") String districtId) {
+        List<Ward> wards = null;
+        try {
+            wards = wardService.findByDistrictId(Integer.parseInt(districtId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(wards, HttpStatus.OK);
     }
 }
 
