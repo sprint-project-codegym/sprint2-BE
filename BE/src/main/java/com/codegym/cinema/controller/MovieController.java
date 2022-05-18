@@ -2,6 +2,7 @@ package com.codegym.cinema.controller;
 
 import com.codegym.cinema.dto.MovieCreateDTO;
 import com.codegym.cinema.entity.*;
+import com.codegym.cinema.entity.dto.MovieDTO;
 import com.codegym.cinema.service.CategoryService;
 import com.codegym.cinema.service.MovieCategoryService;
 import com.codegym.cinema.service.MovieService;
@@ -38,24 +39,33 @@ public class MovieController {
         return categoryService.getCategory();
     }
 
+    //    @PostMapping("/create")
+//    public ResponseEntity<Void> addMovie(@RequestBody MovieCreateDTO listMovieDTO) {
+//        try {
+//        movieService.addMovie(listMovieDTO);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
     @PostMapping("/create")
-    public ResponseEntity<Void> addMovie(@RequestBody MovieCreateDTO listMovieDTO) {
+    public ResponseEntity<Void> addMovie(@RequestBody List<MovieDTO> listMovieDTO) {
         try {
-        movieService.addMovie(listMovieDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+            movieService.addMovie(listMovieDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PutMapping("edit/{id}")
-    public ResponseEntity<List<FieldError>> editUser(@PathVariable("id") int id,
-                                                     @Validated @RequestBody MovieCreateDTO movieCreateDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+    @PutMapping("/edit_movie")
+    public ResponseEntity<Void> editMovie(@RequestBody List<MovieDTO> listMovieDTO) {
+        try {
+            movieService.editMovie(listMovieDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        movieService.updateMovie(id, movieCreateDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

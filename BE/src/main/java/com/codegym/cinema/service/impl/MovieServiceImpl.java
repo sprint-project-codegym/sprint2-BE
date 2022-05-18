@@ -6,6 +6,7 @@ import com.codegym.cinema.dto.RoomDTO;
 import com.codegym.cinema.entity.Category;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.entity.MovieCategory;
+import com.codegym.cinema.entity.dto.MovieDTO;
 import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.repository.MovieRepository;
 import com.codegym.cinema.repository.MovieRoomRepository;
@@ -34,26 +35,24 @@ public class MovieServiceImpl implements MovieService {
     MovieRoomService movieRoomService;
 
     @Override
-    public void addMovie(MovieCreateDTO movie) throws Exception {
-        Integer deleteFlag = 1;
-        movieRepository.createMovie(movie.getActor(), movie.getBanner(), movie.getDescription(), movie.getDirector(), movie.getStartDate(), movie.getEndDate(), movie.getMovieLength(), movie.getMovieName(), movie.getMovieStudio(), movie.getPoster(), movie.getTrailer(), deleteFlag);
-        List<Integer> movieIds = movieRepository.search(movie.getActor(), movie.getBanner(), movie.getDescription(), movie.getDirector(), movie.getStartDate(), movie.getEndDate(), movie.getMovieLength(), movie.getMovieName(), movie.getMovieStudio(), movie.getPoster(), movie.getTrailer(), deleteFlag);
-        System.out.println(movieIds);
-        if (movieIds.size() == 1) {
-            System.out.println(movie.getMovieCategoryList());
-            for (CategoryDTO movieCategory : movie.getMovieCategoryList()) {
-                System.out.println("" + movieIds.get(0) + movieCategory.getCategoryId());
-                movieCategoryService.createMovieCategory(movieIds.get(0), movieCategory.getCategoryId());
-            }
-            for (RoomDTO movieRoom : movie.getMovieRoomList()) {
-                movieRoomService.createMovieRoom(movieIds.get(0), movieRoom.getRoomId());
-            }
+    public void addMovie(List<MovieDTO> listMovieDTO) {
+        for (MovieDTO movieDTO : listMovieDTO) {
+            movieRepository.save(movieDTO.getMovie());
         }
+
     }
 
     @Override
-    public void updateMovie(int id, MovieCreateDTO movieCreateDTO) {
-        movieRepository.saveMovie(id, movieCreateDTO.getActor(), movieCreateDTO.getBanner(), movieCreateDTO.getDescription(), movieCreateDTO.getDirector(), movieCreateDTO.getStartDate(), movieCreateDTO.getEndDate(), movieCreateDTO.getMovieLength(), movieCreateDTO.getMovieName(), movieCreateDTO.getMovieStudio(), movieCreateDTO.getPoster(), movieCreateDTO.getTrailer());
+    public void editMovie(List<MovieDTO> listMovieDTO) {
+        Integer idMovie = listMovieDTO.get(0).getMovie().getMovieId();
+        Movie movie = listMovieDTO.get(0).getMovie();
+        movieRepository.editMovie(movie.getMovieName(), movie.getPosterMovie(), movie.getStartDate(), movie.getEndDate(),
+                movie.getMovieStudio(), movie.getActor(), movie.getDirector(), movie.getMovieLength(), movie.getTrailer(),
+                movie.getMovieId());
+        movieCategoryRepository.deleteMovieCategory(idMovie);
+        for (MovieDTO movieDTO : listMovieDTO) {
+            movieCategoryRepository.createMovieCategory(idMovie, movieDTO.getCategoryId());
+        }
     }
 }
 
