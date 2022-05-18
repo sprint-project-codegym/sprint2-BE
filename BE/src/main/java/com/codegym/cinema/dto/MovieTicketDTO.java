@@ -1,6 +1,4 @@
 package com.codegym.cinema.dto;
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

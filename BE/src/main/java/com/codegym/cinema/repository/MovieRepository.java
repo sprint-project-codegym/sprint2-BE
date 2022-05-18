@@ -6,14 +6,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
+import javax.transaction.Transactional;
 import java.util.List;
+import org.springframework.data.repository.query.Param;
+
+
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
+    @Transactional
+    @Modifying
+    @Query(value = "update movie set movie_name = ?1, poster_movie = ?2, start_date = ?3, end_date = ?4, " +
+            "movie_studio = ?5, actor = ?6, director = ?7, movie_length = ?8, trailer = ?9 where movie_id = ?10", nativeQuery = true)
+    void editMovie(String movieName, String posterMovie, String startDate, String endDate, String studio,
+                   String actor, String director, String length, String trailer, Integer movieId);
 
     @Query(value = "select m.movie_id, m.poster_movie, m.movie_name,m.start_date, m.end_date, m.movie_studio, m.actor, m.director,m.movie_length,m.movie_type,m.trailer,m.banner, m.promote, m.description, m.movie_status_id, m.delete_flag from movie as m where m.movie_id = :id and m.delete_flag = 1", nativeQuery = true)
     Movie findById(@Param("id") String id);
@@ -113,4 +120,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "inner join category as ct on ct.category_id = mc.category_id\n" +
             "where mv.movie_id = ?1", nativeQuery = true)
     Movie findMovieByMovieId(Integer id);
+
 }
