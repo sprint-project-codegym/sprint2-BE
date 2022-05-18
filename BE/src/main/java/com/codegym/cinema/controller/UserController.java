@@ -175,7 +175,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/memberuser/edit/{id}")
+    @PutMapping("/member/user/edit/{id}")
     public ResponseEntity<List<FieldError>> editUser(@PathVariable("id") int id,
                                                      @Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) {
         try {
@@ -190,7 +190,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/memberuser/province")
+    @GetMapping("/member/user/province")
     public ResponseEntity<List<Province>> getListProvince() {
         List<Province> provinces = null;
         try {
@@ -201,7 +201,7 @@ public class UserController {
         return new ResponseEntity<>(provinces, HttpStatus.OK);
     }
 
-    @GetMapping("/memberuser/district")
+    @GetMapping("/member/user/district")
     public ResponseEntity<List<District>> getListDistrict(@RequestParam(value = "provinceId", defaultValue = "") String provinceId) {
         List<District> districts = null;
         try {
@@ -212,7 +212,7 @@ public class UserController {
         return new ResponseEntity<>(districts, HttpStatus.OK);
     }
 
-    @GetMapping("/memberuser/ward")
+    @GetMapping("/member/user/ward")
     public ResponseEntity<List<Ward>> getListWard(@RequestParam(value = "districtId", defaultValue = "") String districtId) {
         List<Ward> wards = null;
         try {
