@@ -161,7 +161,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PutMapping("/member/user/edit/{id}")
+    @PutMapping("/member/user/list/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
         User user = null;
         try {
