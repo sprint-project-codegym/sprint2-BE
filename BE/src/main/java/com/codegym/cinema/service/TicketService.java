@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 public interface TicketService {
 
     //    NgaLT get all booked ticket
-    Page<Ticket> findAllBookedTicket(Pageable pageable);
+    Page<Ticket> findAllBookedTicket(Pageable pageable, Integer userId);
 
 }

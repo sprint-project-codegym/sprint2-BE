@@ -1,6 +1,9 @@
 package com.codegym.cinema.controller;
 
 import com.codegym.cinema.entity.Ticket;
+import com.codegym.cinema.entity.User;
+import com.codegym.cinema.repository.UserRepository;
+import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,12 +20,18 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     //NgaLT get all booked ticket
-    @GetMapping("/booked")
+    @GetMapping("/booked/{username}")
     public ResponseEntity<Page<Ticket>> findAllBookedTicketWithPagination(@RequestParam(defaultValue = "0") int page,
-                                                                          @RequestParam(defaultValue = "3") int size) {
+                                                                          @RequestParam(defaultValue = "3") int size,
+                                                                          @PathVariable String username) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Ticket> tickets = ticketService.findAllBookedTicket(pageable);
+        User user=userRepository.findUserByAccount_Username(username);
+        if(user==null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Page<Ticket> tickets = ticketService.findAllBookedTicket(pageable,user.getUserId());
         if (tickets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

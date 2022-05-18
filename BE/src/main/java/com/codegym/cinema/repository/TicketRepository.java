@@ -17,6 +17,6 @@ public interface TicketRepository extends JpaRepository<Ticket,Integer> {
 //    @Query(value = "select * from ticket where ticket.ticket_status in ("+"'Đã nhận vé'"+","+"'Đợi nhận vé'"+")", nativeQuery = true )
 //    Page<Ticket> findAllBookedTicket(Pageable pageable);
 
-    @Query(value = "select * from ticket where ticket.ticket_status_id in ("+"'1'"+","+"'2'"+") order by ticket.time_create ASC", nativeQuery = true )
-    Page<Ticket> findAllBookedTicket(Pageable pageable);
+    @Query(value = "select * from ticket where user_id=? and ticket.ticket_status_id in ("+"'1'"+","+"'2'"+") order by ticket.time_create ASC", nativeQuery = true )
+    Page<Ticket> findAllBookedTicket(Pageable pageable,Integer userId);
 }

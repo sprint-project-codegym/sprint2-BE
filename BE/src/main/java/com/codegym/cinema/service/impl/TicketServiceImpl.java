@@ -14,7 +14,7 @@ public class TicketServiceImpl implements TicketService {
     private TicketRepository ticketRepository;
 
     @Override
-    public Page<Ticket> findAllBookedTicket(Pageable pageable) {
-        return ticketRepository.findAllBookedTicket(pageable);
+    public Page<Ticket> findAllBookedTicket(Pageable pageable,Integer userId) {
+        return ticketRepository.findAllBookedTicket(pageable,userId);
     }
 }
