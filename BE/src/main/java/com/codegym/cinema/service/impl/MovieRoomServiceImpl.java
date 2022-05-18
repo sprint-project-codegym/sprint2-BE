@@ -14,4 +14,5 @@ public class MovieRoomServiceImpl implements MovieRoomService {
     public void createMovieRoom(Integer movieId, Integer room) {
         movieRoomRepository.createMovieRoom(movieId, room);
     }
+
 }

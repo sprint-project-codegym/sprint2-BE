@@ -12,11 +12,17 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
+    /**
+     * Author: AnhNDH
+     */
     @Override
     public List<Category> getCategory() {
         return categoryRepository.getCategory();
     }
 
+    /**
+     * Author: KhoaTM
+     */
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();

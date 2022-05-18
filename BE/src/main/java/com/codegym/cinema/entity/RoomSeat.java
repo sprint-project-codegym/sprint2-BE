@@ -1,11 +1,14 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "`room_seat`", uniqueConstraints = {
         @UniqueConstraint(name = "ROOM_SEAT_UK", columnNames = {"room_id", "seat_id"})
 })
@@ -16,8 +19,9 @@ public class RoomSeat {
     @Column(name = "room_seat_id")
     private Integer roomSeatId;
 
-    @Column(name = "seat_status")
-    private String seatStatus;
+    @ManyToOne
+    @JoinColumn(name = "seat_status_id")
+    private SeatStatus seatStatus;
 
     @ManyToOne
     @JoinColumn(name = "room_id")

@@ -1,11 +1,17 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "category",
         uniqueConstraints = {
                 @UniqueConstraint(name = "CATEGORY_UK", columnNames = "category_id")
@@ -19,5 +25,4 @@ public class Category {
 
     @Column(name = "category_name")
     private String categoryName;
-
 }
