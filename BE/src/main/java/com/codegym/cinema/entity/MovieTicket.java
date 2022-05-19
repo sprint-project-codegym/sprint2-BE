@@ -1,6 +1,4 @@
 package com.codegym.cinema.entity;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -28,7 +26,7 @@ public class MovieTicket {
     @JoinColumn(name = "show_time_id", referencedColumnName = "show_time_id")
     private ShowTime showTime;
 
-    @Column(name = "show_date", columnDefinition = "date")
+    @Column(name = "show_date",columnDefinition = "date")
     private String showDate;
 
     @Column(name = "ticket_price", columnDefinition = "INT")

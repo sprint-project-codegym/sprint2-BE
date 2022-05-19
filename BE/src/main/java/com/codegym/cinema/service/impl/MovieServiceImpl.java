@@ -15,25 +15,38 @@ import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-
-
     /**
      * Author: KhoaTM
      */
     public static final int DEFAULT_PAGE = 0;
     public static final int DEFAULT_PAGE_SIZE = 8;
 
-    /**
-     * Author: NhungHTC
-     */
     @Autowired
     private MovieRepository movieRepository;
 
-    /**
-     * Author: NhungHTC
-     */
     @Autowired
     private MovieCategoryRepository movieCategoryRepository;
+
+    @Override
+    public Page<Movie> findAll(Pageable page) {
+        return movieRepository.findAll(page);
+    }
+
+    @Override
+    public void deleteMovie(String id) {
+        movieRepository.deleteByMovieId(id);
+    }
+
+    @Override
+    public Movie findById(String id) {
+        return movieRepository.findById(id);
+    }
+
+    @Override
+    public Page<Movie> findByNameAndStudio(Pageable page, String name, String studio) {
+        return movieRepository.findByNameAndStudio(name, studio, page);
+    }
+
 
     /**
      * Author: NhungHTC
@@ -123,5 +136,4 @@ public class MovieServiceImpl implements MovieService {
     public Movie getDetailMovie(Integer id) {
         return movieRepository.findMovieByMovieId(id);
     }
-
 }

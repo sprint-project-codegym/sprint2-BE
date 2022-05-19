@@ -26,6 +26,5 @@ public class StatusRoom {
     @OneToMany(mappedBy = "statusRoom")
     @JsonIgnore
     private Set<Room> roomSet;
-
 }
 

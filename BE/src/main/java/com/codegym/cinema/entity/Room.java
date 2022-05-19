@@ -1,8 +1,10 @@
 package com.codegym.cinema.entity;
 
-import lombok.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

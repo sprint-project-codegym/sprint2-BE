@@ -7,7 +7,15 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface MovieService {
+    Page<Movie> findAll(Pageable page);
+
+    void deleteMovie(String id);
+
+    Movie findById(String id);
+
+    Page<Movie> findByNameAndStudio(Pageable page, String name, String studio);
 
     /**
      * Author: NhungHTC
