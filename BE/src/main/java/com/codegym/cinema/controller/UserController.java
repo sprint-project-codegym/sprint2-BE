@@ -34,7 +34,6 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) throws UnsupportedEncodingException, MessagingException {
-        System.out.println(1111);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
         }

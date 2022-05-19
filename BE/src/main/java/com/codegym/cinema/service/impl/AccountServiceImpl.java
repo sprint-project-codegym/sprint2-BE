@@ -111,7 +111,7 @@ public class AccountServiceImpl implements AccountService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
         helper.setTo(email);
-        helper.setFrom("lenga373737@gmail.com", "A03Cinema");
+        helper.setFrom("leconghaufake4@gmail.com", "A03Cinema");
         helper.setSubject(subject);
         mailContent = "<p sytle='color:red;'>Xin chào " + username + " ,<p>" + "<p> Nhấn vào link sau để xác thực email của bạn:</p>" +
                 "<h3><a href='" + confirmUrl + "'>Link Xác thực( nhấn vào đây)!</a></h3>" +
