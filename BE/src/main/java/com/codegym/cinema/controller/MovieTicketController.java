@@ -19,14 +19,14 @@ public class MovieTicketController {
     @Autowired
     MovieTicketService movieTicketService;
 
-    @GetMapping("/information/{id}")
-    public ResponseEntity<MovieTicket> getDetailMovie(@PathVariable("id") Integer id) {
-        MovieTicket movieTicket = movieTicketService.getDetailMovieTicket(id);
-        if (movieTicket == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(movieTicket, HttpStatus.OK);
-    }
+//    @GetMapping("/information/{id}")
+//    public ResponseEntity<MovieTicket> getDetailMovie(@PathVariable("id") Integer id) {
+//        MovieTicket movieTicket = movieTicketService.getDetailMovieTicket(id);
+//        if (movieTicket == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(movieTicket, HttpStatus.OK);
+//    }
 
 
     //Method: get all movie ticket by movie id - NhungHTC

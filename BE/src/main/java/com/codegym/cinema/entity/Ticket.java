@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,11 +24,9 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "movie_ticket_id", referencedColumnName = "movie_ticket_id")
-    @JsonBackReference
     private MovieTicket movieTicket;
 
     @ManyToOne
-
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 

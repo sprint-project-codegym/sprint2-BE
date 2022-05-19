@@ -1,5 +1,6 @@
 package com.codegym.cinema.repository;
 
+import com.codegym.cinema.entity.MovieTicket;
 import com.codegym.cinema.entity.Ticket;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,4 +71,16 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
             "VALUE (?1,?2,?3,?4,?5)", nativeQuery = true)
     void createTicket(Integer movieTicketId, Integer seatId, Integer userId, String timeCreate, Integer ticketStatusId);
 
+    //PhuocDD
+    @Query(value = "select ticket.* from ticket \n" +
+            "inner join movie_ticket on ticket.movie_ticket_id = movie_ticket.movie_ticket_id\n" +
+            "inner join movie on movie_ticket.movie_id = movie.movie_id\n" +
+            "inner join show_time on movie_ticket.show_time_id = show_time.show_time_id\n" +
+            "inner join room on movie_ticket.room_id = room.room_id\n" +
+            "inner join `user` on ticket.user_id = `user`.user_id\n" +
+            "inner join seat on ticket.seat_id = seat.seat_id\n" +
+            "inner join `row` on seat.row_id = `row`.row_id\n" +
+            "inner join `column` on seat.column_id = `column`.column_id\n" +
+            "where ticket.ticket_id = ?1", nativeQuery = true)
+    Ticket findTicketByTicketId(Integer id);
 }

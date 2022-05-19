@@ -168,13 +168,23 @@ public class TicketController {
     public ResponseEntity<Void> createTicketDTO(@PathVariable(name = "movieTicketId") Integer movieTicketId,
                                                 @PathVariable(name = "userId") Integer userId,
                                                 @PathVariable(name = "seatId") Integer seatId) {
-        try {
-            this.ticketService.saveTicketDTO( movieTicketId, userId, seatId );
-            MovieTicket movieTicket = this.movieTicketService.getMovieTicketById( movieTicketId );
-            this.roomSeatService.updateRoomSeatStatus( seatId, movieTicket.getRoom().getRoomId() );
-            return new ResponseEntity<>( HttpStatus.CREATED );
-        } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
-        }
+//        try {
+//            this.ticketService.saveTicketDTO( movieTicketId, userId, seatId );
+//            MovieTicket movieTicket = this.movieTicketService.getMovieTicketById( movieTicketId );
+//            this.roomSeatService.updateRoomSeatStatus( seatId, movieTicket.getRoom().getRoomId() );
+//            return new ResponseEntity<>( HttpStatus.CREATED );
+//        } catch (Exception e) {
+//            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+//        }
+        return null;
     }
+
+//    @GetMapping("/information/{id}")
+//    public ResponseEntity<Ticket> getDetailMovie(@PathVariable("id") Integer id) {
+//        Ticket ticket = ticketService.getDetailTicket(id);
+//        if (ticket == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(ticket, HttpStatus.OK);
+//    }
 }

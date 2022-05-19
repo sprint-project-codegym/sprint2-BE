@@ -5,9 +5,11 @@ import com.codegym.cinema.entity.Ticket;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
 import java.util.List;
 
 public interface TicketService {
+    Ticket getDetailTicket(Integer id);
     List<Ticket> findAllByBookedTicket(int index);
 
     List<Ticket> findAllByBookedTicketNoPage();

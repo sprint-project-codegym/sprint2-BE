@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MovieTicketService {
 
-    MovieTicket getDetailMovieTicket(Integer id);
+//    MovieTicket getDetailMovieTicket(Integer id);
     //    NhungHTC
 
     MovieTicket getMovieTicket(Integer movieId, String date, Integer showTimeId);

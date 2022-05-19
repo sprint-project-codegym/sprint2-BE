@@ -3,6 +3,7 @@ package com.codegym.cinema.controller;
 import com.codegym.cinema.config.PaypalPaymentIntent;
 import com.codegym.cinema.config.PaypalPaymentMethod;
 import com.codegym.cinema.dto.LinkDTO;
+import com.codegym.cinema.dto.MovieTicketToSendMailDto;
 import com.codegym.cinema.dto.PaypalDTO;
 import com.codegym.cinema.entity.MovieTicket;
 import com.codegym.cinema.payload.response.MessageResponse;
@@ -21,6 +22,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 @RestController
@@ -80,8 +82,8 @@ public class PayPalController {
     }
 
     @PostMapping("/successful")
-    public ResponseEntity<?> sendMailSuccessful(@RequestBody MovieTicket movieTicket) throws MessagingException, UnsupportedEncodingException {
-        paypalService.sendMailPaymentSuccessful(movieTicket);
+    public ResponseEntity<?> sendMailSuccessful(@RequestBody List<MovieTicketToSendMailDto> movieTicketToSendMailDto) throws MessagingException, UnsupportedEncodingException {
+        paypalService.sendMailPaymentSuccessful(movieTicketToSendMailDto);
 
         return ResponseEntity.ok(new MessageResponse("Đã gửi thông tin vé về email"));
     }
