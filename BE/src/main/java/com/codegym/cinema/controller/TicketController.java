@@ -2,6 +2,7 @@ package com.codegym.cinema.controller;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.entity.MovieTicket;
 import com.codegym.cinema.entity.ShowTime;
+import com.codegym.cinema.entity.Ticket;
 import com.codegym.cinema.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -108,4 +109,12 @@ public class TicketController {
         }
     }
 
+//    @GetMapping("/information/{id}")
+//    public ResponseEntity<Ticket> getDetailMovie(@PathVariable("id") Integer id) {
+//        Ticket ticket = ticketService.getDetailTicket(id);
+//        if (ticket == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(ticket, HttpStatus.OK);
+//    }
 }

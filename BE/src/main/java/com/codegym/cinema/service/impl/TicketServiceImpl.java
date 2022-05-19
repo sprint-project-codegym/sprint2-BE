@@ -1,6 +1,7 @@
 package com.codegym.cinema.service.impl;
 
 import com.codegym.cinema.dto.MemberTicketDTO;
+import com.codegym.cinema.entity.Ticket;
 import com.codegym.cinema.entity.TicketStatus;
 import com.codegym.cinema.repository.TicketRepository;
 import com.codegym.cinema.service.TicketService;
@@ -21,6 +22,11 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketStatusService ticketStatusService;
 
+
+    @Override
+    public Ticket getDetailTicket(Integer id) {
+        return ticketRepository.findTicketByTicketId(id);
+    }
 
     @Override
     public void saveTicket(MemberTicketDTO memberTicketDTO) {

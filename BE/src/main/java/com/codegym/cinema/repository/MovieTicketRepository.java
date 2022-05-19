@@ -10,18 +10,6 @@ import java.util.List;
 @Repository
 public interface MovieTicketRepository extends JpaRepository<MovieTicket,Integer> {
 
-    @Query(value = "select * from movie_ticket \n" +
-            "inner join movie on movie_ticket.movie_id = movie.movie_id\n" +
-            "inner join show_time on movie_ticket.show_time_id = show_time.show_time_id\n" +
-            "inner join room on movie_ticket.room_id = room.room_id\n" +
-            "inner join ticket on movie_ticket.movie_ticket_id = ticket.movie_ticket_id\n" +
-            "inner join `user` on ticket.user_id = `user`.user_id\n" +
-            "inner join seat on ticket.seat_id = seat.seat_id\n" +
-            "inner join `row` on seat.row_id = `row`.row_id\n" +
-            "inner join `column` on seat.column_id = `column`.column_id\n" +
-            "where movie_ticket.movie_ticket_id = ?1", nativeQuery = true)
-    MovieTicket findMovieTicketByMovieTicketId(Integer id);
-
     @Query(value =  "select * from movie_ticket " +
             "where movie_id = ?1 and show_date = ?2 and show_time_id = ?3 ",
             nativeQuery = true)

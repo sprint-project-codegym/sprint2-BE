@@ -14,10 +14,6 @@ public class MovieTicketServiceImpl implements MovieTicketService {
     @Autowired
     MovieTicketRepository movieTicketRepository;
 
-    @Override
-    public MovieTicket getDetailMovieTicket(Integer id) {
-        return movieTicketRepository.findMovieTicketByMovieTicketId(id);
-    }
 
     @Override
     public MovieTicket getMovieTicket(Integer movieId, String date, Integer showTimeId) {
