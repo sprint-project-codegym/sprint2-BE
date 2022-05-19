@@ -1,6 +1,7 @@
 package com.codegym.cinema.controller;
 
 import com.codegym.cinema.entity.Movie;
+import com.codegym.cinema.entity.dto.MovieDTO;
 import com.codegym.cinema.repository.MovieCategoryRepository;
 import com.codegym.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -203,6 +204,31 @@ public class MovieController {
         }
     }
 
+    /**
+     * Author: AnhNDH
+     */
+    @PostMapping("/create")
+    public ResponseEntity<Void> addMovie(@RequestBody List<MovieDTO> listMovieDTO) {
+        try {
+            movieService.addMovie(listMovieDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Author: AnhNDH
+     */
+    @PutMapping("/edit_movie")
+    public ResponseEntity<Void> editMovie(@RequestBody List<MovieDTO> listMovieDTO) {
+        try {
+            movieService.editMovie(listMovieDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * Author: DongVTH

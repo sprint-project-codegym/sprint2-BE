@@ -7,7 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieRoomServiceImpl implements MovieRoomService {
-
     @Autowired
-    private MovieRoomRepository movieRoomRepository;
+    MovieRoomRepository movieRoomRepository;
+
+    @Override
+    public void createMovieRoom(Integer movieId, Integer room) {
+        movieRoomRepository.createMovieRoom(movieId, room);
+    }
+
 }
