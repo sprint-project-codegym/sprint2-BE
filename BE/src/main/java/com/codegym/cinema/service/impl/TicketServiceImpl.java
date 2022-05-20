@@ -1,5 +1,4 @@
 package com.codegym.cinema.service.impl;
-
 import com.codegym.cinema.dto.MemberTicketDTO;
 import com.codegym.cinema.entity.Ticket;
 import com.codegym.cinema.entity.TicketStatus;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +17,13 @@ import java.util.List;
 public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketRepository ticketRepository;
-
     @Autowired
     private TicketStatusService ticketStatusService;
+
+    @Override
+    public Page<Ticket> findAllBookedTicket(Pageable pageable, Integer userId) {
+        return ticketRepository.findAllBookedTicket(pageable, userId);
+    }
 
     @Override
     public List<Ticket> findAllByBookedTicket(int index) {

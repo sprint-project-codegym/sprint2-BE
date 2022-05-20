@@ -1,19 +1,9 @@
 package com.codegym.cinema.controller;
-
 import com.codegym.cinema.dto.AccountDTO;
-import com.codegym.cinema.entity.Account;
-import com.codegym.cinema.entity.TransactionHistory;
-import com.codegym.cinema.entity.User;
-import com.codegym.cinema.service.AccountService;
-import com.codegym.cinema.service.TransactionHistoryService;
-import com.codegym.cinema.dto.user.UserDTO;
-import com.codegym.cinema.entity.District;
-import com.codegym.cinema.entity.Province;
-import com.codegym.cinema.entity.Ward;
-import com.codegym.cinema.service.DistrictService;
-import com.codegym.cinema.service.ProvinceService;
-import com.codegym.cinema.service.UserService;
-import com.codegym.cinema.service.WardService;
+import com.codegym.cinema.dto.UserDTO;
+import com.codegym.cinema.entity.*;
+import com.codegym.cinema.payload.response.MessageResponse;
+import com.codegym.cinema.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,19 +14,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.validation.annotation.Validated;
+import java.util.Map;
 
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -44,7 +36,11 @@ public class UserController {
     private AccountService accountService;
 
     @Autowired
+    private AccountRoleService accountRoleService;
+
+    @Autowired
     private TransactionHistoryService transactionHistoryService;
+
 
     @Autowired
     DistrictService districtService;
@@ -54,8 +50,56 @@ public class UserController {
     @Autowired
     WardService wardService;
 
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO userDTO, BindingResult bindingResult) throws UnsupportedEncodingException, MessagingException {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        try {
+            Map<String, String> listError = new HashMap<>();
+            if (userService.findByUsername(userDTO.getUsername()) != null) {
+                listError.put("existAccount", "Tên tài khoản đã tồn tại. Vui lòng nhập tên tài khoản khác.");
+            }
+            if (userService.findUserByIdCard(userDTO.getIdCard()) != null) {
+                listError.put("existIdCard", "Số CMND đã tồn tại. Vui lòng nhập số CMND khác.");
+            }
+            if (userService.findByEmail(userDTO.getEmail()) != null) {
+                listError.put("existEmail", "Email đã tồn tại. Vui lòng nhập số email khác.");
+            }
+            if (!listError.isEmpty()) {
+                return ResponseEntity.badRequest().body(listError);
+            }
+            userService.createUser(userDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("/verify-account")
+    public ResponseEntity<Object> checkCode(@RequestParam String code){
+        Account account = accountService.findAccountByVerificationCode(code);
+        if (account == null){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("account not found"));
+        }
+        accountService.activeAccount(account.getUsername());
+        return ResponseEntity.ok(new MessageResponse("actived"));
+    }
+
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @GetMapping("/member/user/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable(name = "username") String username) {
+    public ResponseEntity<User> getUserByMemberUsername(@PathVariable(name = "username") String username) {
         User user = userService.findByUsername(username);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -223,4 +267,3 @@ public class UserController {
         return new ResponseEntity<>(wards, HttpStatus.OK);
     }
 }
-

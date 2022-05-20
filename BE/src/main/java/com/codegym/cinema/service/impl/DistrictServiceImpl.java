@@ -11,7 +11,11 @@ import java.util.List;
 @Service
 public class DistrictServiceImpl implements DistrictService {
     @Autowired
-    DistrictRepository districtRepository;
+    private DistrictRepository districtRepository;
+    @Override
+    public List<District> findAllDistrictByProvinceId(Integer provinceId) {
+        return districtRepository.findAllDistrictByProvinceId(provinceId);
+    }
 
     @Override
     public List<District> findAll() {

@@ -4,6 +4,7 @@ import com.codegym.cinema.dto.AccountDTO;
 import com.codegym.cinema.entity.Account;
 
 import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 public interface AccountService {
 
@@ -24,5 +25,11 @@ public interface AccountService {
     void deleteVerifyCode(String username);
 
     void saveSocialAccount(Account account);
+
+    /*NgaLT*/
+    void  addVerifyCodeToVerifyAccount(String username, String email) throws UnsupportedEncodingException, MessagingException;
+    void activeAccount(String username);
+    void sendMailToVerifyAccount(String username, String email, String randomCode) throws MessagingException, UnsupportedEncodingException;
+
 
 }

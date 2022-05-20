@@ -5,6 +5,8 @@ import com.codegym.cinema.entity.District;
 import java.util.List;
 
 public interface DistrictService {
+    List<District> findAllDistrictByProvinceId(Integer provinceId);
+
     List<District> findAll();
 
     List<District> findByProvinceId(int provinceId);

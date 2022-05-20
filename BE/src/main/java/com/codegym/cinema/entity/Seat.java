@@ -37,5 +37,4 @@ public class Seat {
     @OneToMany(mappedBy = "seat")
     @JsonIgnore
     private Set<Ticket> ticketSet;
-
 }
