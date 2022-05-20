@@ -1,5 +1,6 @@
 package com.codegym.cinema.controller;
 
+import com.codegym.cinema.dto.MovieCreateDTO;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.entity.dto.MovieDTO;
 import com.codegym.cinema.repository.MovieCategoryRepository;
@@ -208,9 +209,10 @@ public class MovieController {
      * Author: AnhNDH
      */
     @PostMapping("/create")
-    public ResponseEntity<Void> addMovie(@RequestBody List<MovieDTO> listMovieDTO) {
+    public ResponseEntity<Void> addMovie(@RequestBody MovieCreateDTO movieCreateDTO) {
+        System.out.println(movieCreateDTO);
         try {
-            movieService.addMovie(listMovieDTO);
+            movieService.addMovie(movieCreateDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());

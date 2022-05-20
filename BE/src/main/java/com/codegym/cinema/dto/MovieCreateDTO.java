@@ -17,8 +17,6 @@ import java.util.Set;
 
 public class MovieCreateDTO {
 
-    private int movieId;
-
     //    @NotBlank(message = "Không được để trống!")
     private String movieName;
 
@@ -32,7 +30,7 @@ public class MovieCreateDTO {
     private String actor;
 
     //    @NotBlank(message = "Không được để trống!")
-    private int movieLength;
+    private String movieLength;
 
     //    @NotBlank(message = "Không được để trống!")
     private String movieStudio;
@@ -45,19 +43,8 @@ public class MovieCreateDTO {
 
     //    @NotNull(message = "Không được để trống!")
     private String movieType;
-
-    //    @NotNull(message = "Không được để trống!")
-    private MovieTicketDTO movieTicketDTO;
-
-
-
-    //    @NotNull(message = "Không được để trống!")
     List<CategoryDTO> movieCategoryList;
 
-    //    @NotNull(message = "Không được để trống!")
-    List<RoomDTO> movieRoomList;
-
-    private String banner;
     private String description;
     private String poster;
 }

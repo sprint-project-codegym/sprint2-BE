@@ -15,6 +15,17 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
+
+    @Transactional
+    @Modifying
+    @Query(value = "insert into movie(actor, description, director, start_date, end_date, movie_length, movie_name, movie_studio," +
+            "poster_movie, trailer, delete_flag) values (?1, ?2, ?3, DATE ?4, DATE ?5, ?6, ?7, ?8, ?9, ?10, ?11);", nativeQuery = true)
+    void createMovie(String actor, String description, String director, String startDate, String endDate, int movieLength,
+                     String movieName, String movieStudio, String posterMovie, String trailer, int deleteFlag);
+
+    @Query(value = "select movie_id from movie where actor = ?1 and description = ?2 and director= ?3 and start_date= ?4 and end_date= ?5 and movie_length= ?6 and movie_name= ?7 and movie_studio= ?8 and poster_movie = ?9 and trailer = ?10 and delete_flag = 1", nativeQuery = true)
+    List<Integer> search(String actor, String description, String director, String startDate, String endDate, int movieLength, String movieName, String movieStudio, String poster, String trailer, Integer deleteFlag);
+
     @Transactional
     @Modifying
     @Query(value = "update movie set movie_name = ?1, poster_movie = ?2, start_date = ?3, end_date = ?4, " +
