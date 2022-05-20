@@ -39,7 +39,6 @@ public class MovieServiceImpl implements MovieService {
         for (MovieDTO movieDTO : listMovieDTO) {
             movieRepository.save(movieDTO.getMovie());
         }
-
     }
 
     @Override

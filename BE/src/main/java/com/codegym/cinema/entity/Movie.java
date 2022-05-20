@@ -1,5 +1,6 @@
 package com.codegym.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -83,6 +84,6 @@ public class Movie {
 
 
     @OneToMany(mappedBy = "rating")
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Rating> ratingSet;
 }
