@@ -1,5 +1,8 @@
 package com.codegym.cinema.service.impl;
 
+import com.codegym.cinema.dto.CategoryDTO;
+import com.codegym.cinema.dto.MovieCreateDTO;
+import com.codegym.cinema.dto.RoomDTO;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.entity.dto.MovieDTO;
 import com.codegym.cinema.repository.MovieCategoryRepository;
@@ -35,11 +38,21 @@ public class MovieServiceImpl implements MovieService {
     MovieRoomService movieRoomService;
 
     @Override
-    public void addMovie(List<MovieDTO> listMovieDTO) {
-        for (MovieDTO movieDTO : listMovieDTO) {
-            movieRepository.save(movieDTO.getMovie());
+    public void addMovie(MovieCreateDTO movie) throws Exception {
+        Integer deleteFlag = 1;
+        movieRepository.createMovie(movie.getActor(), movie.getDescription(), movie.getDirector(), movie.getStartDate(), movie.getEndDate(), Integer.parseInt(movie.getMovieLength()), movie.getMovieName(), movie.getMovieStudio(), movie.getPoster(), movie.getTrailer(), deleteFlag);
+        List<Integer> movieIds = movieRepository.search(movie.getActor(), movie.getDescription(), movie.getDirector(), movie.getStartDate(), movie.getEndDate(), Integer.parseInt(movie.getMovieLength()), movie.getMovieName(), movie.getMovieStudio(), movie.getPoster(), movie.getTrailer(), deleteFlag);
+        System.out.println(movieIds);
+        if (movieIds.size() == 1) {
+            System.out.println(movie.getMovieCategoryList());
+            for (CategoryDTO movieCategory : movie.getMovieCategoryList()) {
+                System.out.println("" + movieIds.get(0) + movieCategory.getCategoryId());
+                movieCategoryService.createMovieCategory(movieIds.get(0), movieCategory.getCategoryId());
+            }
+//            for (RoomDTO movieRoom : movie.getMovieRoomList()) {
+//                movieRoomService.createMovieRoom(movieIds.get(0), movieRoom.getRoomId());
+//            }
         }
-
     }
 
     @Override
