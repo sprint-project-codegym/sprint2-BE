@@ -213,8 +213,10 @@ public class MovieController {
             movieService.addMovie(listMovieDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            System.out.println(e.getMessage());
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     /**
