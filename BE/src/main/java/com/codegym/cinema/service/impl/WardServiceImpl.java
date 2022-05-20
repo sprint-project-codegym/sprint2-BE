@@ -27,4 +27,14 @@ public class WardServiceImpl implements WardService {
     public List<Ward> findAllByDistrictId(int districtId) {
         return wardRepository.findAllByDistrictId(districtId);
     }
+
+    @Override
+    public List<Ward> findAll() {
+        return wardRepository.findAll();
+    }
+
+    @Override
+    public List<Ward> findByDistrictId(int districtId) {
+        return wardRepository.findByDistrictId(districtId);
+    }
 }

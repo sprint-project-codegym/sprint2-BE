@@ -17,5 +17,4 @@ public class ProvinceServiceImpl implements ProvinceService {
     public List<Province> findAll() {
         return provinceRepository.findAll();
     }
-
 }

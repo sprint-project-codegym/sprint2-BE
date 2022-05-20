@@ -1,12 +1,14 @@
 package com.codegym.cinema.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "transaction_history")
 public class TransactionHistory {
 
@@ -27,4 +29,7 @@ public class TransactionHistory {
 
     @Column(name = "status", columnDefinition = "bit(1)")
     private boolean status;
+
+    @Column(name = "point_change", columnDefinition = "int")
+    private int pointChange;
 }

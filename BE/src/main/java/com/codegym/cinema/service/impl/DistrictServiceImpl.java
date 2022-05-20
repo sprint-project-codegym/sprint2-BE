@@ -16,4 +16,14 @@ public class DistrictServiceImpl implements DistrictService {
     public List<District> findAllDistrictByProvinceId(Integer provinceId) {
         return districtRepository.findAllDistrictByProvinceId(provinceId);
     }
+
+    @Override
+    public List<District> findAll() {
+        return districtRepository.findAll();
+    }
+
+    @Override
+    public List<District> findByProvinceId(int provinceId) {
+        return districtRepository.findByProvinceId(provinceId);
+    }
 }

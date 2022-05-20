@@ -1,5 +1,6 @@
 package com.codegym.cinema.service.impl;
 
+import com.codegym.cinema.dto.AccountDTO;
 import com.codegym.cinema.entity.Account;
 import com.codegym.cinema.repository.AccountRepository;
 import com.codegym.cinema.repository.AccountRoleRepository;
@@ -11,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +23,7 @@ import java.util.Random;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+
     @Autowired
     AccountRepository accountRepository;
 
@@ -34,9 +36,17 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+
+    @Override
+    public void setNewPassword(AccountDTO accountDTO) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        accountDTO.setNewPassword(passwordEncoder.encode(accountDTO.getNewPassword()));
+        accountRepository.saveAccountDTO(accountDTO.getNewPassword(), accountDTO.getUsername());
+    }
+
     @Override
     public void updatePassword(String password, String username) {
-        accountRepository.updatePassword(password,username);
+        accountRepository.updatePassword(password, username);
         deleteVerifyCode(username);
     }
 
@@ -55,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
         String code = new Random().nextInt(900000) + 100000 + "";
         accountRepository.addVerifyCode(code, username);
         Account account = findAccountByVerificationCode(code);
-        sendMailToResetPassword(account.getUser().getEmail(),code);
+        sendMailToResetPassword(account.getUser().getEmail(), code);
     }
 
     @Override
@@ -85,15 +95,15 @@ public class AccountServiceImpl implements AccountService {
     public void saveSocialAccount(Account account) {
         accountRepository.saveSocialAccount(
                 account.getUsername(), account.getPassword(),
-                account.getIsEnable(), LocalDate.now(),account.getProvider());
+                account.getIsEnable(), LocalDate.now(), account.getProvider());
         accountRoleRepository.setDefaultRole(account.getUsername());
     }
 
     @Override
     public void addVerifyCodeToVerifyAccount(String username, String email) throws UnsupportedEncodingException, MessagingException {
         String code = RandomString.make(64);
-        accountRepository.addVerifyCodeToVerifyAccount(code,username);
-        sendMailToVerifyAccount(username,email,code);
+        accountRepository.addVerifyCodeToVerifyAccount(code, username);
+        sendMailToVerifyAccount(username, email, code);
     }
 
     @Override

@@ -1,13 +1,15 @@
 package com.codegym.cinema.service;
 
+import com.codegym.cinema.dto.AccountDTO;
 import com.codegym.cinema.entity.Account;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 
 public interface AccountService {
+
+    void setNewPassword(AccountDTO accountDTO);
+
     void updatePassword(String password, String username);
 
     Account findAccountByUsername(String username);

@@ -62,7 +62,7 @@ public class SecurityController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        try {
+//        try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                             loginRequest.getPassword()));
@@ -73,9 +73,9 @@ public class SecurityController {
             String jwtToken = jwtUtils.generateToken(userDetails);
             User user = userService.findByUsername(loginRequest.getUsername());
             return ResponseEntity.ok(new JwtResponse(jwtToken, user, userDetails.getAuthorities()));
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
     }
 
 

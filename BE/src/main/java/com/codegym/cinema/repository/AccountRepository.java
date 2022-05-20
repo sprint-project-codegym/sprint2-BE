@@ -6,19 +6,21 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
+    @Transactional
+    @Modifying
+    @Query(value = "update `account` set `password`=?1 where `username`=?2", nativeQuery = true)
+    void saveAccountDTO(String newPassword, String username);
 
-//    @Modifying
-//    @Query(value = "select * from account where username = ?", nativeQuery = true)
     /*
     * HauLC
     * */
+    @Query(value = "select * from account where username = ?", nativeQuery = true)
     Account findByUsername(String username);
 
-    @Query(value="select * from account where username = ? and provider is null", nativeQuery = true)
+    @Query(value = "select * from account where username = ? and provider is null", nativeQuery = true)
     Account findByUsernameToResetPassword(String username);
 
     @Transactional
@@ -61,5 +63,4 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     @Query(value = "update account set verification_code=? where username=? ", nativeQuery = true)
     @Modifying
     void addVerifyCodeToVerifyAccount(String code, String username);
-
 }

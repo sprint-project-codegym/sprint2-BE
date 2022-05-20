@@ -2,7 +2,6 @@ package com.codegym.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,8 +27,8 @@ public class Account {
     @Column(name = "register_date", columnDefinition = "DATE")
     private String registerDate;
 
-    @Column(name = "account_status", columnDefinition = "VARCHAR(50)")
-    private String accountStatus;
+    @Column(name = "account_status", columnDefinition = "BIT(1)")
+    private boolean accountStatus;
 
     @OneToOne(mappedBy = "account")
     @JsonIgnore
@@ -54,9 +53,4 @@ public class Account {
     @OneToMany(mappedBy = "account")
     @JsonBackReference
     private Set<AccountRole> roles;
-
-    @Override
-    public String toString() {
-        return null;
-    }
 }

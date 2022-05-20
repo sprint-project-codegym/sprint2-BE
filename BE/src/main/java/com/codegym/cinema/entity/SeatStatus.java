@@ -27,3 +27,4 @@ public class SeatStatus {
     @JsonIgnore
     private Set<RoomSeat> roomSeatSet;
 }
+

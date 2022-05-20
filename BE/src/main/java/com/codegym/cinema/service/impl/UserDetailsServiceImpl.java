@@ -17,10 +17,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByUsername(username);
-        if (account == null) {
-            throw new UsernameNotFoundException("User " + username + " was not found in the database");
+        Account account = null;
+        try {
+            account = accountRepository.findByUsername(username);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
+//        if (account == null) {
+//            throw new UsernameNotFoundException("User " + username + " was not found in the database");
+//        }
         return MyUserDetailsImpl.build(account);
     }
 }

@@ -1,11 +1,17 @@
 package com.codegym.cinema.entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ticket")
 public class Ticket {
 
@@ -19,7 +25,6 @@ public class Ticket {
     private MovieTicket movieTicket;
 
     @ManyToOne
-
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
@@ -27,11 +32,8 @@ public class Ticket {
     @JoinColumn(name = "seat_id", referencedColumnName = "seat_id")
     private Seat seat;
 
-    @Column(name = "time_create", columnDefinition = "date")
+    @Column(name = "time_create",columnDefinition = "date")
     private String createTime;
-
-//    @Column(name = "ticket_status", columnDefinition = "varchar(50)")
-//    private String ticketStatus;
 
     @ManyToOne
     @JoinColumn(name = "ticket_status_id", referencedColumnName = "ticket_status_id")
