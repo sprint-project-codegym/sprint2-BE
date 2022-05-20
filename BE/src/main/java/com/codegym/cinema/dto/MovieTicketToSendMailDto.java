@@ -11,12 +11,12 @@ public class MovieTicketToSendMailDto {
     private String email;
     private String username;
     private String roomName;
-    private String projectionType;
+    private String projectionName;
     private String posterMovie;
     private String movieName;
     private String showDate;
     private String showTime;
     private String seatRow;
     private String seatColumn;
-    private String ticketPrice;
+    private Integer ticketPrice;
 }

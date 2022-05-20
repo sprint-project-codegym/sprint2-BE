@@ -7,8 +7,6 @@ import java.util.List;
 import com.codegym.cinema.config.PaypalPaymentIntent;
 import com.codegym.cinema.config.PaypalPaymentMethod;
 import com.codegym.cinema.dto.MovieTicketToSendMailDto;
-import com.codegym.cinema.entity.MovieTicket;
-import com.codegym.cinema.entity.Ticket;
 import com.codegym.cinema.service.PaypalService;
 import com.paypal.api.payments.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +92,7 @@ public class PaypalServiceImpl implements PaypalService {
                     "</p>" +
                     "<p>" +
                     "<b>Loại chiếu:  &nbsp;</b>" +
-                    movieTicketToSendMailDto.get(i).getProjectionType() +
+                    movieTicketToSendMailDto.get(i).getProjectionName() +
                     "</p>" +
                     "<p>" +
                     "<b>Ghế:  &nbsp;</b>" +
