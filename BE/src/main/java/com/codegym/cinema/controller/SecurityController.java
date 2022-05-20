@@ -186,9 +186,4 @@ public class SecurityController {
         JwtResponse jwtResponse = new JwtResponse(jwtToken, user, userDetails.getAuthorities());
         return ResponseEntity.ok(jwtResponse);
     }
-
-    @GetMapping("/admin/test")
-    private ResponseEntity<?> adminTest(){
-        return ResponseEntity.ok(new MessageResponse("ok"));
-    }
 }
