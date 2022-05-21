@@ -68,7 +68,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
      * Author: KhoaTM
      */
     @Query(value = "SELECT * FROM movie " +
-            "WHERE start_date > now() " +
+            "WHERE start_date < ADDDATE(now(), INTERVAL 14 DAY)" +
+            "AND start_date > now() " +
             "ORDER BY start_date", nativeQuery = true)
     Page<Movie> findUpComingMovies(Pageable pageable);
 

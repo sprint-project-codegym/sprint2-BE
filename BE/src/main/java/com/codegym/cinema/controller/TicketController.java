@@ -1,4 +1,5 @@
 package com.codegym.cinema.controller;
+import com.codegym.cinema.dto.TicketDTO;
 import com.codegym.cinema.entity.Movie;
 import com.codegym.cinema.entity.MovieTicket;
 import com.codegym.cinema.entity.ShowTime;
@@ -194,19 +195,16 @@ public class TicketController {
         }
     }
 
-    @PostMapping("/createTicketDTO/{movieTicketId}/{userId}/{seatId}")
-    public ResponseEntity<Void> createTicketDTO(@PathVariable(name = "movieTicketId") Integer movieTicketId,
-                                                @PathVariable(name = "userId") Integer userId,
-                                                @PathVariable(name = "seatId") Integer seatId) {
+    @PostMapping("/createTicketDTO/")
+    public ResponseEntity<Void> createTicketDTO(@RequestBody TicketDTO ticketDTO) {
 //        try {
-//            this.ticketService.saveTicketDTO( movieTicketId, userId, seatId );
-//            MovieTicket movieTicket = this.movieTicketService.getMovieTicketById( movieTicketId );
-//            this.roomSeatService.updateRoomSeatStatus( seatId, movieTicket.getRoom().getRoomId() );
-//            return new ResponseEntity<>( HttpStatus.CREATED );
+            this.ticketService.saveTicketDTO( ticketDTO.getMovieTicketId(), ticketDTO.getUsername(), ticketDTO.getSeatId() );
+            MovieTicket movieTicket = this.movieTicketService.getMovieTicketById(ticketDTO.getMovieTicketId());
+            this.roomSeatService.updateRoomSeatStatus(ticketDTO.getSeatId(), movieTicket.getRoom().getRoomId() );
+            return new ResponseEntity<>( HttpStatus.CREATED );
 //        } catch (Exception e) {
 //            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
 //        }
-        return null;
     }
 
 //    @GetMapping("/information/{id}")

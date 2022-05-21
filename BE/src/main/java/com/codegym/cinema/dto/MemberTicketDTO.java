@@ -1,5 +1,6 @@
 package com.codegym.cinema.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,17 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class MemberTicketDTO {
     private Integer ticketId;
     private Integer movieTicketId;
+    private String username;
     private Integer seatId;
-    private Integer userId;
     private String createTime;
     private Integer ticketStatusId;
-
-    public MemberTicketDTO(Integer movieTicketId, Integer userId, Integer seatId) {
-        this.movieTicketId = movieTicketId;
-        this.userId = userId;
-        this.seatId = seatId;
-    }
 }

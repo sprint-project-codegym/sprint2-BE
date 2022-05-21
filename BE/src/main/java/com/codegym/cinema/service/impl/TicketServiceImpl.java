@@ -2,9 +2,12 @@ package com.codegym.cinema.service.impl;
 import com.codegym.cinema.dto.MemberTicketDTO;
 import com.codegym.cinema.entity.Ticket;
 import com.codegym.cinema.entity.TicketStatus;
+import com.codegym.cinema.entity.User;
 import com.codegym.cinema.repository.TicketRepository;
+import com.codegym.cinema.service.AccountService;
 import com.codegym.cinema.service.TicketService;
 import com.codegym.cinema.service.TicketStatusService;
+import com.codegym.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +22,8 @@ public class TicketServiceImpl implements TicketService {
     private TicketRepository ticketRepository;
     @Autowired
     private TicketStatusService ticketStatusService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public Page<Ticket> findAllBookedTicket(Pageable pageable, Integer userId) {
@@ -72,29 +77,22 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void saveTicket(MemberTicketDTO memberTicketDTO) {
-        TicketStatus ticketStatus = this.ticketStatusService.findById(1);
-        String createTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
-        ticketRepository.saveTicket(memberTicketDTO.getMovieTicketId(),
-                memberTicketDTO.getSeatId(),
-                memberTicketDTO.getUserId(),
-                ticketStatus.getTicketStatusId(),
-                createTime);
+//        TicketStatus ticketStatus = this.ticketStatusService.findById(1);
+//        String createTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//
+//        User user = userService.findByUsername(memberTicketDTO.getUsername());
+//        ticketRepository.saveTicket(
+//                memberTicketDTO.getSeatId(),
+//                user.getAccount().getUsername(),
+//                ticketStatus.getTicketStatusId(),
+//                createTime);
     }
 
     @Override
-    public void saveTicketDTO(Integer movieTicketId, Integer userId, Integer seatId) {
-        TicketStatus ticketStatus = this.ticketStatusService.findById(1);
+    public void saveTicketDTO(Integer movieTicketId, String username, Integer seatId) {
+        User user = userService.findByUsername(username);
         String createTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        ticketRepository.saveTicket(movieTicketId, seatId, userId,
-                ticketStatus.getTicketStatusId(), createTime);
+        ticketRepository.saveTicket(movieTicketId, seatId, user.getUserId(), createTime);
 
-    }
-
-    @Override
-    public void createTicket(MemberTicketDTO memberTicketDTO) {
-        String createTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        memberTicketDTO.setCreateTime(createTime);
-        ticketRepository.createTicket(memberTicketDTO.getMovieTicketId(), memberTicketDTO.getSeatId(), memberTicketDTO.getUserId(), memberTicketDTO.getCreateTime(), memberTicketDTO.getTicketStatusId());
     }
 }

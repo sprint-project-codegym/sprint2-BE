@@ -71,10 +71,10 @@ public interface TicketRepository extends JpaRepository<Ticket,Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ticket(ticketId, seat_id, user_id,ticket_status_id,time_create) " +
-            "VALUES (?1, ?2, ?3, ?4, ?5) ",
+    @Query(value = "INSERT INTO ticket(movie_ticket_id, seat_id, user_id, ticket_status_id,time_create) " +
+            "VALUES (?1, ?2, ?3,'2',?4) ",
             nativeQuery = true)
-    void saveTicket(Integer ticketId, Integer seatId, Integer userId, Integer ticketStatusId, String timeCreate);
+    void saveTicket(Integer movieTicketId, Integer seatId, Integer userId, String timeCreate);
 
     //creatTicket()
     @Transactional

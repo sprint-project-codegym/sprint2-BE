@@ -32,9 +32,8 @@ public interface TicketService {
      */
     void saveTicket(MemberTicketDTO memberTicketDTO);
 
-    void saveTicketDTO(Integer movieTicketId, Integer userId, Integer seatId);
+    void saveTicketDTO(Integer movieTicketId, String username, Integer seatId);
 
-    void createTicket(MemberTicketDTO memberTicketDTO);
 
 
 }
