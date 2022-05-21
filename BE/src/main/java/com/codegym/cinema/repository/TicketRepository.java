@@ -95,4 +95,5 @@ public interface TicketRepository extends JpaRepository<Ticket,Integer> {
             "inner join `column` on seat.column_id = `column`.column_id\n" +
             "where ticket.ticket_id = ?1", nativeQuery = true)
     Ticket findTicketByTicketId(Integer id);
+
 }
