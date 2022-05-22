@@ -197,14 +197,14 @@ public class TicketController {
 
     @PostMapping("/createTicketDTO/")
     public ResponseEntity<Void> createTicketDTO(@RequestBody TicketDTO ticketDTO) {
-//        try {
+        try {
             this.ticketService.saveTicketDTO( ticketDTO.getMovieTicketId(), ticketDTO.getUsername(), ticketDTO.getSeatId() );
             MovieTicket movieTicket = this.movieTicketService.getMovieTicketById(ticketDTO.getMovieTicketId());
             this.roomSeatService.updateRoomSeatStatus(ticketDTO.getSeatId(), movieTicket.getRoom().getRoomId() );
             return new ResponseEntity<>( HttpStatus.CREATED );
-//        } catch (Exception e) {
-//            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
-//        }
+        } catch (Exception e) {
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        }
     }
 
 //    @GetMapping("/information/{id}")
