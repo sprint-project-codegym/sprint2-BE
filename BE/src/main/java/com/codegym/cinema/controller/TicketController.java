@@ -206,13 +206,4 @@ public class TicketController {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
     }
-
-//    @GetMapping("/information/{id}")
-//    public ResponseEntity<Ticket> getDetailMovie(@PathVariable("id") Integer id) {
-//        Ticket ticket = ticketService.getDetailTicket(id);
-//        if (ticket == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(ticket, HttpStatus.OK);
-//    }
 }
