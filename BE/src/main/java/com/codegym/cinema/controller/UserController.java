@@ -194,7 +194,7 @@ public class UserController {
                                               @RequestParam(value = "size", defaultValue = "5") Integer size) {
         Page<User> users = null;
         try {
-            Pageable pageable = PageRequest.of(page, 2);
+            Pageable pageable = PageRequest.of(page, 5);
             users = userService.findByNameUserAndIdCardAndPhoneAndAddress(name, idCard, phone, pageable);
         } catch (Exception e) {
             e.printStackTrace();
